@@ -1,0 +1,6 @@
+Yogastra - Installation Guide
+
+1. Download and extract the template files.
+2. Open the `yoga-center` folder.
+3. You can open any `.html` file directly in your browser, or run a local server (e.g., VS Code Live Server, python -m http.server, etc.) to view the site.
+4. The dashboard pages are for demonstration and use static HTML/JS. In a real application, you would connect these to a backend server.

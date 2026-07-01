@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <title>Member Login | Yogastra</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/dark-mode.css">
+    <link rel="stylesheet" href="../assets/css/rtl.css">
+</head>
+<body class="d-flex flex-column min-vh-100 bg-section">
+
+    <nav aria-label="Main navigation" class="navbar navbar-expand-lg bg-transparent shadow-none pt-4">
+        <div class="container">
+            <a class="navbar-brand text-dark" href="index.html"><i class="fas fa-leaf me-2"></i>Yogastra</a>
+            <div class="ms-auto d-flex align-items-center gap-3">
+                <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle Dark Mode"><i class="fas fa-moon text-dark"></i></button>
+                <button type="button" class="rtl-toggle" id="rtl-toggle" aria-label="Toggle RTL Mode"><i class="fas fa-language text-dark"></i></button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow-1 d-flex align-items-center py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6 col-lg-5">
+                    <div class="bg-white p-4 p-md-5 rounded-4 shadow-lg border-0">
+                        <div class="text-center mb-4">
+                            <h2 class="fw-bold" id="formTitle">User Login</h2>
+                            <p class="text-muted small">Please sign in to your account.</p>
+                        </div>
+                        
+                        <!-- Role Selector -->
+                        <div class="d-flex p-1 bg-light rounded-pill mb-4 border" style="max-width: 250px; margin: 0 auto; position: relative;">
+                            <button type="button" class="btn btn-sm w-50 rounded-pill btn-white shadow-sm text-primary fw-bold" id="btnUserLogin" style="transition: all 0.3s ease; background-color: #fff;">User</button>
+                            <button type="button" class="btn btn-sm w-50 rounded-pill text-muted fw-bold border-0" id="btnAdminLogin" style="transition: all 0.3s ease; background-color: transparent;">Admin</button>
+                        </div>
+
+                        <!-- Demo Credentials Hint -->
+                        <div class="alert alert-info small mb-4" id="demoCredsBox">
+                            <div class="fw-bold mb-1"><i class="fas fa-circle-info me-1"></i>Demo Credentials</div>
+                            <div id="userCreds">Email: <code>sarah.mitchell@example.com</code><br>Password: <code>user123</code></div>
+                            <div id="adminCreds" class="d-none">Email: <code>admin@yogastra.com</code><br>Password: <code>admin123</code></div>
+                            <button type="button" class="btn btn-link btn-sm p-0 mt-1" id="autofillCreds">Autofill these credentials</button>
+                        </div>
+
+                        <!-- Login Form -->
+                        <form id="loginForm" class="needs-validation" novalidate>
+                            <div class="alert alert-danger small d-none" id="loginError">Incorrect email or password for the selected role. Please use the demo credentials shown above.</div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email Address</label>
+                                <input type="email" class="form-control" id="email" required>
+                                <div class="invalid-feedback">Please enter a valid email address.</div>
+                            </div>
+                            <div class="mb-4">
+                                <label for="password" class="form-label d-flex justify-content-between">
+                                    Password
+                                    <a href="contact.html" class="text-primary small text-decoration-none">Forgot Password?</a>
+                                </label>
+                                <input type="password" class="form-control" id="password" autocomplete="current-password" required>
+                                <div class="invalid-feedback">Please enter your password.</div>
+                            </div>
+                            <div class="mb-4 form-check">
+                                <input type="checkbox" class="form-check-input" id="rememberMe">
+                                <label class="form-check-label small text-muted" for="rememberMe">Remember me on this device</label>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100 py-2 mb-3">Sign In</button>
+                        </form>
+
+                        <script>
+                            document.addEventListener('DOMContentLoaded', () => {
+                                const btnUserLogin = document.getElementById('btnUserLogin');
+                                const btnAdminLogin = document.getElementById('btnAdminLogin');
+                                const formTitle = document.getElementById('formTitle');
+                                const loginForm = document.getElementById('loginForm');
+                                const emailInput = document.getElementById('email');
+                                const passwordInput = document.getElementById('password');
+                                const loginError = document.getElementById('loginError');
+                                const userCreds = document.getElementById('userCreds');
+                                const adminCreds = document.getElementById('adminCreds');
+                                const autofillCreds = document.getElementById('autofillCreds');
+                                let currentRole = 'user';
+
+                                // Default demo credentials (shared by everyone for testing this static site)
+                                const DEFAULT_CREDENTIALS = {
+                                    user: { email: 'sarah.mitchell@example.com', password: 'user123' },
+                                    admin: { email: 'admin@yogastra.com', password: 'admin123' }
+                                };
+
+                                function clearError() {
+                                    loginError.classList.add('d-none');
+                                }
+
+                                btnUserLogin.addEventListener('click', () => {
+                                    currentRole = 'user';
+                                    formTitle.innerText = 'User Login';
+                                    btnUserLogin.classList.add('btn-white', 'shadow-sm', 'text-primary');
+                                    btnUserLogin.style.backgroundColor = '#fff';
+                                    btnUserLogin.classList.remove('text-muted');
+
+                                    btnAdminLogin.classList.remove('btn-white', 'shadow-sm', 'text-primary');
+                                    btnAdminLogin.style.backgroundColor = 'transparent';
+                                    btnAdminLogin.classList.add('text-muted');
+
+                                    userCreds.classList.remove('d-none');
+                                    adminCreds.classList.add('d-none');
+                                    clearError();
+                                });
+
+                                btnAdminLogin.addEventListener('click', () => {
+                                    currentRole = 'admin';
+                                    formTitle.innerText = 'Admin Login';
+                                    btnAdminLogin.classList.add('btn-white', 'shadow-sm', 'text-primary');
+                                    btnAdminLogin.style.backgroundColor = '#fff';
+                                    btnAdminLogin.classList.remove('text-muted');
+
+                                    btnUserLogin.classList.remove('btn-white', 'shadow-sm', 'text-primary');
+                                    btnUserLogin.style.backgroundColor = 'transparent';
+                                    btnUserLogin.classList.add('text-muted');
+
+                                    adminCreds.classList.remove('d-none');
+                                    userCreds.classList.add('d-none');
+                                    clearError();
+                                });
+
+                                autofillCreds.addEventListener('click', () => {
+                                    const creds = DEFAULT_CREDENTIALS[currentRole];
+                                    emailInput.value = creds.email;
+                                    passwordInput.value = creds.password;
+                                    emailInput.classList.remove('is-invalid');
+                                    passwordInput.classList.remove('is-invalid');
+                                    clearError();
+                                });
+
+                                loginForm.addEventListener('submit', (e) => {
+                                    e.preventDefault();
+                                    clearError();
+
+                                    if (!loginForm.checkValidity()) {
+                                        e.stopPropagation();
+                                        loginForm.classList.add('was-validated');
+                                        return;
+                                    }
+
+                                    const creds = DEFAULT_CREDENTIALS[currentRole];
+                                    const emailMatches = emailInput.value.trim().toLowerCase() === creds.email.toLowerCase();
+                                    const passwordMatches = passwordInput.value === creds.password;
+
+                                    if (!emailMatches || !passwordMatches) {
+                                        loginError.classList.remove('d-none');
+                                        return;
+                                    }
+
+                                    // Simple frontend logic
+                                    if (currentRole === 'user') {
+                                        window.location.href = 'dashboard-home.html';
+                                    } else {
+                                        window.location.href = '../admin/dashboard.html';
+                                    }
+                                });
+                            });
+                        </script>
+
+                        <div class="text-center">
+                            <p class="small text-muted mb-0">Don't have an account? <a href="register.html" class="fw-bold text-primary">Register here</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="py-4 text-center">
+        <div class="container">
+            <p class="mb-0 text-muted small">&copy; 2026 Yogastra. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

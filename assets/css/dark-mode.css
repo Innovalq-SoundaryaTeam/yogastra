@@ -1,0 +1,200 @@
+/* 
+==============================================
+YOGASTRA - DARK MODE
+==============================================
+*/
+
+[data-theme="dark"] {
+  /* Override CSS Variables for Dark Mode */
+  --color-bg: #121212;
+  --color-sidebar: #1E1E1E;
+  --color-text: #E0E0E0;
+  --color-text-muted: #A0A0A0;
+  --color-section: #2A2A2A;
+  
+  /* Primary color remains the same, or slightly adjusted for contrast if needed */
+  --color-primary: #7CA87B; 
+  --color-primary-dark: #6B8F6A;
+  --color-primary-light: rgba(124, 168, 123, 0.15);
+  
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.3);
+  --shadow-md: 0 8px 24px rgba(0,0,0,0.4);
+  --shadow-lg: 0 12px 32px rgba(0,0,0,0.5);
+}
+
+[data-theme="dark"] body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+
+[data-theme="dark"] h1, 
+[data-theme="dark"] h2, 
+[data-theme="dark"] h3, 
+[data-theme="dark"] h4, 
+[data-theme="dark"] h5, 
+[data-theme="dark"] h6 {
+  color: #FFFFFF;
+}
+
+[data-theme="dark"] .navbar {
+  background-color: var(--color-sidebar);
+}
+
+[data-theme="dark"] .navbar-brand,
+[data-theme="dark"] .navbar .nav-link {
+  color: var(--color-text) !important;
+}
+
+[data-theme="dark"] .navbar .nav-link:hover,
+[data-theme="dark"] .navbar .nav-link.active {
+  color: var(--color-primary) !important;
+}
+
+[data-theme="dark"] .navbar .nav-link::after {
+  background-color: var(--color-primary);
+}
+
+[data-theme="dark"] .yoga-card {
+  background-color: var(--color-sidebar);
+  border-color: rgba(255,255,255,0.05);
+}
+
+[data-theme="dark"] .hero-overlay {
+  background: linear-gradient(to right, rgba(18, 18, 18, 0.9) 0%, rgba(18, 18, 18, 0.6) 100%);
+}
+
+[data-theme="dark"] .form-control {
+  background-color: var(--color-sidebar);
+  border-color: #333;
+  color: var(--color-text);
+}
+
+[data-theme="dark"] .form-control:focus {
+  background-color: var(--color-sidebar);
+  color: var(--color-text);
+  border-color: var(--color-primary);
+}
+
+[data-theme="dark"] .table {
+  color: var(--color-text);
+}
+
+[data-theme="dark"] .table-striped>tbody>tr:nth-of-type(odd)>* {
+  color: var(--color-text);
+  background-color: rgba(255,255,255,0.02);
+}
+
+[data-theme="dark"] .accordion-item {
+  background-color: var(--color-sidebar);
+  border-color: #333;
+}
+
+[data-theme="dark"] .accordion-button {
+  background-color: var(--color-sidebar);
+  color: var(--color-text);
+}
+
+[data-theme="dark"] .accordion-button:not(.collapsed) {
+  color: var(--color-primary);
+  background-color: var(--color-primary-light);
+}
+
+[data-theme="dark"] .accordion-button::after {
+  filter: invert(1) grayscale(100%) brightness(2);
+}
+
+[data-theme="dark"] .accordion-body {
+  color: var(--color-text);
+  background-color: var(--color-sidebar);
+}
+
+[data-theme="dark"] .cta-banner {
+  background: linear-gradient(135deg, #1A241A 0%, #2A362A 100%);
+}
+
+[data-theme="dark"] .cta-banner:hover {
+  background: linear-gradient(135deg, #2A362A 0%, #1A241A 100%);
+}
+
+[data-theme="dark"] .bg-white {
+  background-color: #1C1C1C !important;
+  color: var(--color-text) !important;
+}
+
+[data-theme="dark"] .bg-light {
+  background-color: rgba(255,255,255,0.08) !important;
+  color: var(--color-text) !important;
+}
+
+[data-theme="dark"] .text-muted,
+[data-theme="dark"] .text-secondary,
+[data-theme="dark"] .text-body-secondary {
+  color: var(--color-text-muted) !important;
+}
+
+[data-theme="dark"] .text-dark,
+[data-theme="dark"] .text-black-50,
+[data-theme="dark"] .text-body {
+  color: var(--color-text) !important;
+}
+
+[data-theme="dark"] .border-light,
+[data-theme="dark"] .border-secondary,
+[data-theme="dark"] .border-white-50 {
+  border-color: rgba(255,255,255,0.12) !important;
+}
+
+[data-theme="dark"] .form-control,
+[data-theme="dark"] .form-select,
+[data-theme="dark"] .form-control:focus,
+[data-theme="dark"] .form-select:focus,
+[data-theme="dark"] .form-control:active,
+[data-theme="dark"] .form-select:active {
+  background-color: var(--color-sidebar) !important;
+  border-color: rgba(255,255,255,0.12) !important;
+  color: var(--color-text) !important;
+  box-shadow: none !important;
+}
+
+[data-theme="dark"] .form-select {
+  background-image: linear-gradient(45deg, transparent 50%, rgba(255,255,255,0.35) 50%),
+                    linear-gradient(135deg, rgba(255,255,255,0.35) 50%, transparent 50%),
+                    linear-gradient(to right, rgba(255,255,255,0.15), rgba(255,255,255,0.15));
+  background-position: calc(100% - 1rem) center, calc(100% - 0.65rem) center, right 0.5rem center;
+  background-size: 8px 8px, 8px 8px, 1px 1.5em;
+  background-repeat: no-repeat;
+  color: var(--color-text) !important;
+}
+
+[data-theme="dark"] .form-select option,
+[data-theme="dark"] select option {
+  background-color: var(--color-sidebar) !important;
+  color: var(--color-text) !important;
+}
+
+[data-theme="dark"] .form-select:focus {
+  border-color: var(--color-primary) !important;
+  box-shadow: 0 0 0 0.2rem rgba(124, 168, 123, 0.25) !important;
+}
+
+[data-theme="dark"] .btn-outline-primary {
+  color: var(--color-primary) !important;
+  border-color: var(--color-primary) !important;
+}
+
+[data-theme="dark"] .text-white-50,
+[data-theme="dark"] .navbar,
+[data-theme="dark"] .site-footer,
+[data-theme="dark"] .dashboard-sidebar {
+  color: rgba(255,255,255,0.75) !important;
+}
+
+[data-theme="dark"] .skeleton-box {
+  background-color: rgba(255,255,255,0.05);
+}
+
+@media (max-width: 991.98px) {
+  [data-theme="dark"] .hero-overlay {
+    background: rgba(18, 18, 18, 0.85);
+  }
+}

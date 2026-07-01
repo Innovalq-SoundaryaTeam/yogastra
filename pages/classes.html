@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="View our yoga and meditation classes. Filter by style, level, and day.">
+    <title>Classes | Yogastra</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/dark-mode.css">
+    <link rel="stylesheet" href="../assets/css/rtl.css">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav aria-label="Main navigation" class="navbar navbar-expand-lg sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-leaf me-2 icon-bounce"></i>Yogastra
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="classes.html">Classes</a></li>
+                    <li class="nav-item"><a class="nav-link" href="instructors.html">Instructors</a></li>
+                    <li class="nav-item"><a class="nav-link" href="pricing.html">Pricing</a></li>
+                    <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+                <div class="d-flex align-items-center gap-3">
+                    <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle Dark Mode">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button type="button" class="rtl-toggle" id="rtl-toggle" aria-label="Toggle RTL Mode">
+                        <i class="fas fa-language"></i>
+                    </button>
+                    <a href="login.html" class="btn btn-outline-primary d-none d-lg-inline-flex">Member Login</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="py-5 bg-section text-center">
+        <div class="container py-4">
+            <h1 class="display-4 fw-bold">Our Classes</h1>
+            <p class="lead text-muted mx-auto" style="max-width: 600px;">Find the perfect class for your mood, experience level, and schedule.</p>
+        </div>
+    </header>
+
+    <!-- Filters & Classes -->
+    <section class="py-5 my-4">
+        <div class="container">
+            <!-- Filter Bar -->
+            <div class="bg-white p-3 rounded-3 shadow-sm mb-5 d-flex flex-wrap gap-3 align-items-center justify-content-between">
+                <div class="d-flex flex-wrap gap-3">
+                    <select class="form-select w-auto" aria-label="Filter by Style">
+                        <option selected>All Styles</option>
+                        <option value="1">Hatha</option>
+                        <option value="2">Vinyasa</option>
+                        <option value="3">Yin</option>
+                        <option value="4">Meditation</option>
+                    </select>
+                    <select class="form-select w-auto" aria-label="Filter by Level">
+                        <option selected>All Levels</option>
+                        <option value="1">Beginner</option>
+                        <option value="2">Intermediate</option>
+                        <option value="3">Advanced</option>
+                    </select>
+                    <select class="form-select w-auto" aria-label="Filter by Day">
+                        <option selected>Any Day</option>
+                        <option value="1">Weekday</option>
+                        <option value="2">Weekend</option>
+                    </select>
+                </div>
+                <div>
+                    <span class="text-muted small">Showing 6 Classes</span>
+                </div>
+            </div>
+
+            <!-- Class Grid -->
+            <div class="row g-4" id="classGrid">
+                <!-- Class 1 -->
+                <div class="col-md-6 col-lg-4" data-page="1">
+                    <div class="yoga-card">
+                        <div class="card-img-wrapper" style="aspect-ratio: 16/9;">
+                            <img src="https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?auto=format&fit=crop&w=600&q=80" alt="Hatha Foundation">
+                        </div>
+                        <div class="yoga-card-body">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h4 class="mb-0"><a href="class-details.html" class="text-reset">Hatha Foundation</a></h4>
+                                <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill">Beginner</span>
+                            </div>
+                            <p class="text-muted small mb-3">By David Chen &bull; 60 Min</p>
+                            <p class="text-muted mb-4">Learn the fundamentals of yoga postures and breathing techniques. Perfect for newcomers.</p>
+
+                            <div class="d-flex justify-content-between align-items-center border-top pt-3">
+                                <span class="fw-bold small"><i class="far fa-clock text-primary me-1"></i> Mon, Wed 18:00</span>
+                                <a href="login.html" class="btn btn-sm btn-primary">Book Class</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Class 2 -->
+                <div class="col-md-6 col-lg-4" data-page="1">
+                    <div class="yoga-card">
+                        <div class="card-img-wrapper" style="aspect-ratio: 16/9;">
+                            <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=600&q=80" alt="Dynamic Vinyasa">
+                        </div>
+                        <div class="yoga-card-body">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h4 class="mb-0"><a href="class-details.html" class="text-reset">Dynamic Vinyasa</a></h4>
+                                <span class="badge bg-warning-subtle text-warning-emphasis border border-warning-subtle rounded-pill">Intermediate</span>
+                            </div>
+                            <p class="text-muted small mb-3">By Sarah Jenkins &bull; 75 Min</p>
+                            <p class="text-muted mb-4">A fast-paced, fluid practice linking movement to breath. Builds heat and endurance.</p>
+
+                            <div class="d-flex justify-content-between align-items-center border-top pt-3">
+                                <span class="fw-bold small"><i class="far fa-clock text-primary me-1"></i> Tue, Thu 07:00</span>
+                                <a href="login.html" class="btn btn-sm btn-primary">Book Class</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Class 3 -->
+                <div class="col-md-6 col-lg-4" data-page="1">
+                    <div class="yoga-card">
+                        <div class="card-img-wrapper" style="aspect-ratio: 16/9;">
+                            <img src="https://images.unsplash.com/photo-1552286450-4a669f880062?auto=format&fit=crop&w=600&q=80" alt="Yin Restore">
+                        </div>
+                        <div class="yoga-card-body">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h4 class="mb-0"><a href="class-details.html" class="text-reset">Yin Restore</a></h4>
+                                <span class="badge bg-secondary-subtle text-secondary-emphasis border border-secondary-subtle rounded-pill">All Levels</span>
+                            </div>
+                            <p class="text-muted small mb-3">By Kiran Rani &bull; 60 Min</p>
+                            <p class="text-muted mb-4">Deep stretching and restorative poses held for longer periods to target connective tissues.</p>
+
+                            <div class="d-flex justify-content-between align-items-center border-top pt-3">
+                                <span class="fw-bold small"><i class="far fa-clock text-primary me-1"></i> Fri 18:00</span>
+                                <a href="login.html" class="btn btn-sm btn-primary">Book Class</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Class 4 -->
+                <div class="col-md-6 col-lg-4 d-none" data-page="2">
+                    <div class="yoga-card">
+                        <div class="card-img-wrapper" style="aspect-ratio: 16/9;">
+                            <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=600&q=80" alt="Power Vinyasa">
+                        </div>
+                        <div class="yoga-card-body">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h4 class="mb-0"><a href="class-details.html" class="text-reset">Power Vinyasa</a></h4>
+                                <span class="badge bg-danger-subtle text-danger-emphasis border border-danger-subtle rounded-pill">Advanced</span>
+                            </div>
+                            <p class="text-muted small mb-3">By Sarah Jenkins &bull; 60 Min</p>
+                            <p class="text-muted mb-4">A high-intensity, strength-focused flow for experienced practitioners looking for a challenge.</p>
+
+                            <div class="d-flex justify-content-between align-items-center border-top pt-3">
+                                <span class="fw-bold small"><i class="far fa-clock text-primary me-1"></i> Mon, Fri 07:00</span>
+                                <a href="login.html" class="btn btn-sm btn-primary">Book Class</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Class 5 -->
+                <div class="col-md-6 col-lg-4 d-none" data-page="2">
+                    <div class="yoga-card">
+                        <div class="card-img-wrapper" style="aspect-ratio: 16/9;">
+                            <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=600&q=80" alt="Guided Meditation">
+                        </div>
+                        <div class="yoga-card-body">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h4 class="mb-0"><a href="class-details.html" class="text-reset">Guided Meditation</a></h4>
+                                <span class="badge bg-secondary-subtle text-secondary-emphasis border border-secondary-subtle rounded-pill">All Levels</span>
+                            </div>
+                            <p class="text-muted small mb-3">By Kiran Rani &bull; 30 Min</p>
+                            <p class="text-muted mb-4">Mindfulness practices to quiet the mind, reduce stress, and improve mental clarity.</p>
+
+                            <div class="d-flex justify-content-between align-items-center border-top pt-3">
+                                <span class="fw-bold small"><i class="far fa-clock text-primary me-1"></i> Wed 12:00</span>
+                                <a href="login.html" class="btn btn-sm btn-primary">Book Class</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Class 6 -->
+                <div class="col-md-6 col-lg-4 d-none" data-page="2">
+                    <div class="yoga-card">
+                        <div class="card-img-wrapper" style="aspect-ratio: 16/9;">
+                            <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=600&q=80" alt="Gentle Hatha">
+                        </div>
+                        <div class="yoga-card-body">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h4 class="mb-0"><a href="class-details.html" class="text-reset">Gentle Hatha</a></h4>
+                                <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill">Beginner</span>
+                            </div>
+                            <p class="text-muted small mb-3">By David Chen &bull; 45 Min</p>
+                            <p class="text-muted mb-4">A slower-paced session focused on gentle stretches and relaxed breathing for all bodies.</p>
+
+                            <div class="d-flex justify-content-between align-items-center border-top pt-3">
+                                <span class="fw-bold small"><i class="far fa-clock text-primary me-1"></i> Sat 09:00</span>
+                                <a href="login.html" class="btn btn-sm btn-primary">Book Class</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pagination -->
+            <nav class="mt-5" aria-label="Class pagination">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item disabled" id="page-prev-item"><a class="page-link" href="#" id="page-prev" tabindex="-1">Previous</a></li>
+                    <li class="page-item active"><a class="page-link" href="#" data-page-link="1">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#" data-page-link="2">2</a></li>
+                    <li class="page-item" id="page-next-item"><a class="page-link" href="#" id="page-next">Next</a></li>
+                </ul>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="row mt-3 text-center text-white-50 border-top border-secondary pt-4">
+                <div class="col-12"><p class="mb-0">&copy; 2026 Yogastra. All rights reserved.</p></div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script>
+        // Class list pagination (client-side, 3 classes per page)
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('#classGrid > [data-page]');
+            const pageLinks = document.querySelectorAll('[data-page-link]');
+            const prevItem = document.getElementById('page-prev-item');
+            const nextItem = document.getElementById('page-next-item');
+            const prevBtn = document.getElementById('page-prev');
+            const nextBtn = document.getElementById('page-next');
+            const totalPages = pageLinks.length;
+            let currentPage = 1;
+
+            function showPage(page) {
+                if (page < 1 || page > totalPages) return;
+                currentPage = page;
+
+                cards.forEach(card => {
+                    card.classList.toggle('d-none', Number(card.dataset.page) !== page);
+                });
+
+                pageLinks.forEach(link => {
+                    link.closest('.page-item').classList.toggle('active', Number(link.dataset.pageLink) === page);
+                });
+
+                prevItem.classList.toggle('disabled', page === 1);
+                nextItem.classList.toggle('disabled', page === totalPages);
+            }
+
+            pageLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    showPage(Number(link.dataset.pageLink));
+                });
+            });
+
+            prevBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                showPage(currentPage - 1);
+            });
+
+            nextBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                showPage(currentPage + 1);
+            });
+        });
+    </script>
+</body>
+</html>

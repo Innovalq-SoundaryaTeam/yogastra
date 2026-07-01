@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <title>Membership | Yogastra</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/dark-mode.css">
+    <link rel="stylesheet" href="../assets/css/rtl.css">
+</head>
+<body class="bg-section">
+
+    <div class="d-flex">
+        <!-- Sidebar -->
+        <aside class="dashboard-sidebar bg-sidebar d-flex flex-column p-4 position-fixed h-100" id="dashboard-sidebar">
+            <div class="mb-5 d-flex justify-content-between align-items-center">
+                <a class="navbar-brand text-primary fs-4 fw-bold" href="index.html"><i class="fas fa-leaf me-2"></i>Yogastra</a>
+                <button type="button" class="btn btn-sm btn-light d-lg-none" id="sidebar-close" aria-label="Close Sidebar"><i class="fas fa-times"></i></button>
+            </div>
+            
+            <nav class="flex-grow-1">
+                <a href="dashboard-home.html" class="dashboard-nav-link"><i class="fas fa-home me-2"></i> Home</a>
+                <a href="dashboard-book.html" class="dashboard-nav-link"><i class="fas fa-calendar-plus me-2"></i> Book a Class</a>
+                <a href="dashboard-history.html" class="dashboard-nav-link"><i class="fas fa-history me-2"></i> My Classes</a>
+                <a href="dashboard-membership.html" class="dashboard-nav-link active"><i class="fas fa-id-card me-2"></i> Membership</a>
+                <a href="dashboard-profile.html" class="dashboard-nav-link"><i class="fas fa-user me-2"></i> Profile</a>
+            </nav>
+            
+            <div class="mt-auto">
+                <button type="button" class="theme-toggle mb-3" id="theme-toggle" aria-label="Toggle Dark Mode"><i class="fas fa-moon text-dark"></i></button>
+                <button type="button" class="rtl-toggle mb-3" id="rtl-toggle" aria-label="Toggle RTL Mode"><i class="fas fa-language text-dark"></i></button>
+                <a href="index.html" class="dashboard-nav-link text-danger"><i class="fas fa-sign-out-alt me-2"></i> Logout</a>
+            </div>
+        </aside>
+        
+        <div class="dashboard-overlay" id="dashboard-overlay"></div>
+
+        <!-- Main Content -->
+        <main class="dashboard-main ms-auto p-4 p-md-5">
+            <div class="d-lg-none d-flex justify-content-between align-items-center mb-4">
+                <h4 class="mb-0 fw-bold">Membership</h4>
+                <button type="button" class="btn btn-outline-secondary" id="sidebar-toggle" aria-label="Open Sidebar"><i class="fas fa-bars"></i></button>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-end mb-4 pb-3 border-bottom">
+                <div>
+                    <h2 class="fw-bold mb-1">My Membership</h2>
+                    <p class="text-muted mb-0">Manage your subscription and billing details.</p>
+                </div>
+            </div>
+
+            <div class="skeleton-content mb-4">
+                <div class="row g-4">
+                    <div class="col-lg-8"><div class="skeleton-box w-100 rounded-4" style="height: 300px;"></div></div>
+                    <div class="col-lg-4"><div class="skeleton-box w-100 rounded-4" style="height: 300px;"></div></div>
+                </div>
+            </div>
+
+            <div class="real-content" style="display: none;">
+                <div class="row g-4 mb-5">
+                    <!-- Current Plan -->
+                    <div class="col-lg-8">
+                        <div class="bg-white p-4 p-md-5 rounded-4 shadow-sm h-100 position-relative border-start border-primary border-4">
+                            <span class="position-absolute top-0 end-0 m-4 badge bg-success px-3 py-2 rounded-pill">Active</span>
+                            
+                            <h6 class="text-muted text-uppercase fw-bold mb-1">Current Plan</h6>
+                            <h2 class="display-6 fw-bold text-primary mb-4">Standard <span class="fs-4 text-muted fw-normal">($89/mo)</span></h2>
+                            
+                            <div class="row mb-4">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <p class="text-muted small mb-1">Billing Cycle</p>
+                                    <h6 class="fw-bold">Monthly</h6>
+                                </div>
+                                <div class="col-sm-6">
+                                    <p class="text-muted small mb-1">Next Renewal</p>
+                                    <h6 class="fw-bold">October 12, 2026</h6>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span class="text-muted fw-bold">Classes Remaining This Month</span>
+                                    <span class="fw-bold">4 / 10</span>
+                                </div>
+                                <div class="progress bg-light" style="height: 10px;">
+                                    <div class="progress-bar bg-primary rounded-pill" role="progressbar" style="width: 40%;" aria-valuenow="4" aria-valuemin="0" aria-valuemax="10"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="d-flex gap-3">
+                                <button type="button" class="btn btn-primary">Upgrade Plan</button>
+                                <button type="button" class="btn btn-outline-danger">Cancel Membership</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Payment Method -->
+                    <div class="col-lg-4">
+                        <div class="bg-white p-4 p-md-5 rounded-4 shadow-sm h-100">
+                            <h5 class="fw-bold mb-4">Payment Method</h5>
+                            
+                            <div class="d-flex align-items-center mb-4 p-3 bg-light rounded-3 border">
+                                <i class="fab fa-cc-visa text-primary fs-1 me-3"></i>
+                                <div>
+                                    <h6 class="fw-bold mb-0">Visa ending in 4242</h6>
+                                    <small class="text-muted">Expires 12/28</small>
+                                </div>
+                            </div>
+                            
+                            <button type="button" class="btn btn-outline-primary w-100 mb-4">Update Payment Method</button>
+                            
+                            <div class="alert alert-info small mb-0 border-0 bg-primary-subtle text-primary-emphasis">
+                                <i class="fas fa-info-circle me-2"></i> Your card will automatically be charged on Oct 12, 2026.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h4 class="fw-bold mb-3">Billing History</h4>
+                <div class="bg-white rounded-4 shadow-sm overflow-hidden">
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0 align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th class="py-3 px-4">Date</th>
+                                    <th class="py-3 px-4">Description</th>
+                                    <th class="py-3 px-4">Amount</th>
+                                    <th class="py-3 px-4 text-end">Receipt</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="py-3 px-4">Sep 12, 2026</td>
+                                    <td class="py-3 px-4">Standard Membership (Monthly)</td>
+                                    <td class="py-3 px-4">$89.00</td>
+                                    <td class="py-3 px-4 text-end"><a href="../documentation/credits.txt" class="text-primary" aria-label="Download September invoice"><i class="fas fa-download"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4">Aug 12, 2026</td>
+                                    <td class="py-3 px-4">Standard Membership (Monthly)</td>
+                                    <td class="py-3 px-4">$89.00</td>
+                                    <td class="py-3 px-4 text-end"><a href="../documentation/credits.txt" class="text-primary" aria-label="Download August invoice"><i class="fas fa-download"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4">Jul 12, 2026</td>
+                                    <td class="py-3 px-4">Standard Membership (Monthly)</td>
+                                    <td class="py-3 px-4">$89.00</td>
+                                    <td class="py-3 px-4 text-end"><a href="../documentation/credits.txt" class="text-primary" aria-label="Download July invoice"><i class="fas fa-download"></i></a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/dashboard.js"></script>
+</body>
+</html>

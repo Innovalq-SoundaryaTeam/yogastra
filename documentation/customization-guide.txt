@@ -1,0 +1,13 @@
+Yogastra - Customization Guide
+
+Colors and Typography:
+- All main colors and fonts are defined as CSS variables in `assets/css/style.css` under the `:root` pseudo-class.
+- To change the primary color, modify `--color-primary`.
+- Fonts can be swapped by updating the Google Fonts link in the HTML `<head>` and modifying `--font-heading` and `--font-body` variables.
+
+Dark Mode:
+- Dark mode variables are defined in `assets/css/dark-mode.css` under `[data-theme="dark"]`.
+- Toggle logic is located in `assets/js/main.js`.
+
+RTL (Right-to-Left):
+- Add `dir="rtl"` to the `<html>` tag to enable RTL. The `assets/css/rtl.css` contains the overriding styles for RTL layouts.

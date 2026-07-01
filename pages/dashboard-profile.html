@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <title>My Profile | Yogastra</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/dark-mode.css">
+    <link rel="stylesheet" href="../assets/css/rtl.css">
+</head>
+<body class="bg-section">
+
+    <div class="d-flex">
+        <!-- Sidebar -->
+        <aside class="dashboard-sidebar bg-sidebar d-flex flex-column p-4 position-fixed h-100" id="dashboard-sidebar">
+            <div class="mb-5 d-flex justify-content-between align-items-center">
+                <a class="navbar-brand text-primary fs-4 fw-bold" href="index.html"><i class="fas fa-leaf me-2"></i>Yogastra</a>
+                <button type="button" class="btn btn-sm btn-light d-lg-none" id="sidebar-close" aria-label="Close Sidebar"><i class="fas fa-times"></i></button>
+            </div>
+
+            <nav class="flex-grow-1" aria-label="Dashboard navigation">
+                <a href="dashboard-home.html" class="dashboard-nav-link"><i class="fas fa-home me-2"></i> Home</a>
+                <a href="dashboard-book.html" class="dashboard-nav-link"><i class="fas fa-calendar-plus me-2"></i> Book a Class</a>
+                <a href="dashboard-history.html" class="dashboard-nav-link"><i class="fas fa-history me-2"></i> My Classes</a>
+                <a href="dashboard-membership.html" class="dashboard-nav-link"><i class="fas fa-id-card me-2"></i> Membership</a>
+                <a href="dashboard-profile.html" class="dashboard-nav-link active"><i class="fas fa-user me-2"></i> Profile</a>
+            </nav>
+
+            <div class="mt-auto">
+                <button type="button" class="theme-toggle mb-3" id="theme-toggle" aria-label="Toggle Dark Mode"><i class="fas fa-moon text-dark"></i></button>
+                <button type="button" class="rtl-toggle mb-3" id="rtl-toggle" aria-label="Toggle RTL Mode"><i class="fas fa-language text-dark"></i></button>
+                <a href="index.html" class="dashboard-nav-link text-danger"><i class="fas fa-sign-out-alt me-2"></i> Logout</a>
+            </div>
+        </aside>
+
+        <div class="dashboard-overlay" id="dashboard-overlay"></div>
+
+        <!-- Main Content -->
+        <main class="dashboard-main ms-auto p-4 p-md-5">
+            <div class="d-lg-none d-flex justify-content-between align-items-center mb-4">
+                <h4 class="mb-0 fw-bold">Profile</h4>
+                <button type="button" class="btn btn-outline-secondary" id="sidebar-toggle" aria-label="Open Sidebar"><i class="fas fa-bars"></i></button>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-end mb-4 pb-3 border-bottom">
+                <div>
+                    <h2 class="fw-bold mb-1">My Profile</h2>
+                    <p class="text-muted mb-0">Manage your personal details and account settings.</p>
+                </div>
+            </div>
+
+            <div class="skeleton-content mb-4">
+                <div class="row g-4">
+                    <div class="col-lg-4"><div class="skeleton-box w-100 rounded-4" style="height: 260px;"></div></div>
+                    <div class="col-lg-8"><div class="skeleton-box w-100 rounded-4" style="height: 260px;"></div></div>
+                </div>
+            </div>
+
+            <div class="real-content" style="display: none;">
+                <div class="row g-4">
+                    <!-- Avatar / Summary Card -->
+                    <div class="col-lg-4">
+                        <div class="bg-white p-4 rounded-4 shadow-sm h-100 text-center">
+                            <img src="https://ui-avatars.com/api/?name=Sarah+Mitchell&background=6B8F6A&color=fff&size=128" alt="Sarah Mitchell" class="rounded-circle mb-3 shadow-sm" width="120" height="120">
+                            <h5 class="fw-bold mb-1">Sarah Mitchell</h5>
+                            <p class="text-muted small mb-3">Member since Jan 2026</p>
+                            <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill px-3 py-2 mb-4">Standard Plan</span>
+                            <div>
+                                <button type="button" class="btn btn-outline-primary btn-sm w-100">
+                                    <i class="fas fa-camera me-2"></i>Change Photo
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Profile Details Form -->
+                    <div class="col-lg-8">
+                        <div class="bg-white p-4 p-md-5 rounded-4 shadow-sm mb-4">
+                            <h5 class="fw-bold mb-4">Personal Information</h5>
+                            <form id="profileForm" class="needs-validation" novalidate>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label for="fullName" class="form-label">Full Name</label>
+                                        <input type="text" class="form-control" id="fullName" value="Sarah Mitchell" required>
+                                        <div class="invalid-feedback">Please enter your name.</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="profileEmail" class="form-label">Email Address</label>
+                                        <input type="email" class="form-control" id="profileEmail" value="sarah.mitchell@example.com" required>
+                                        <div class="invalid-feedback">Please enter a valid email.</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="profilePhone" class="form-label">Phone Number</label>
+                                        <input type="tel" class="form-control" id="profilePhone" value="+1 (555) 987-6543" required>
+                                        <div class="invalid-feedback">Please enter your phone number.</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="profileDob" class="form-label">Date of Birth</label>
+                                        <input type="date" class="form-control" id="profileDob" value="1994-06-18">
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="profileEmergency" class="form-label">Emergency Contact</label>
+                                        <input type="text" class="form-control" id="profileEmergency" placeholder="Name and phone number">
+                                    </div>
+                                </div>
+                                <div class="mt-4">
+                                    <button type="submit" class="btn btn-primary px-4">Save Changes</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="bg-white p-4 p-md-5 rounded-4 shadow-sm">
+                            <h5 class="fw-bold mb-4">Change Password</h5>
+                            <form id="passwordForm" class="needs-validation" novalidate>
+                                <div class="row g-3">
+                                    <div class="col-md-4">
+                                        <label for="currentPassword" class="form-label">Current Password</label>
+                                        <input type="password" class="form-control" id="currentPassword" required>
+                                        <div class="invalid-feedback">Required.</div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="newPassword" class="form-label">New Password</label>
+                                        <input type="password" class="form-control" id="newPassword" required>
+                                        <div class="invalid-feedback">Required.</div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="confirmNewPassword" class="form-label">Confirm New Password</label>
+                                        <input type="password" class="form-control" id="confirmNewPassword" required>
+                                        <div class="invalid-feedback">Required.</div>
+                                    </div>
+                                </div>
+                                <div class="mt-4">
+                                    <button type="submit" class="btn btn-outline-primary px-4">Update Password</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Success Toast -->
+    <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1080;">
+        <div id="profileToast" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    <i class="fas fa-check-circle me-2"></i>Your changes have been saved.
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/dashboard.js"></script>
+    <script>
+        // Profile & password forms: fake-submit with success toast (no backend wired up yet)
+        document.addEventListener('DOMContentLoaded', () => {
+            const toastEl = document.getElementById('profileToast');
+            let hideTimer = null;
+
+            function showToast() {
+                if (!toastEl) return;
+                clearTimeout(hideTimer);
+                toastEl.classList.add('show');
+                hideTimer = setTimeout(() => toastEl.classList.remove('show'), 4000);
+            }
+
+            const closeBtn = toastEl ? toastEl.querySelector('.btn-close') : null;
+            if (closeBtn) {
+                closeBtn.addEventListener('click', () => {
+                    clearTimeout(hideTimer);
+                    toastEl.classList.remove('show');
+                });
+            }
+
+            ['profileForm', 'passwordForm'].forEach(id => {
+                const form = document.getElementById(id);
+                if (!form) return;
+                form.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    e.stopImmediatePropagation();
+
+                    if (!form.checkValidity()) {
+                        form.classList.add('was-validated');
+                        return;
+                    }
+
+                    showToast();
+                    if (id === 'passwordForm') {
+                        form.reset();
+                        form.classList.remove('was-validated');
+                    }
+                }, true);
+            });
+        });
+    </script>
+</body>
+</html>

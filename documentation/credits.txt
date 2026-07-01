@@ -1,0 +1,16 @@
+Yogastra - Credits
+
+Typography:
+- Google Fonts: Lora, Nunito (https://fonts.google.com/)
+
+Icons:
+- Font Awesome (https://fontawesome.com/)
+
+Framework:
+- Bootstrap 5 (https://getbootstrap.com/)
+
+Images:
+- Dummy images sourced from Unsplash (https://unsplash.com/)
+
+Plugins:
+- Form Validation, Dark Mode, Tabs: Custom Vanilla JS

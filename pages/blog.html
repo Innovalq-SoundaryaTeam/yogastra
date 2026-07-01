@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Read our latest articles on yoga, mindfulness, and wellness.">
+    <title>Blog | Yogastra</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/dark-mode.css">
+    <link rel="stylesheet" href="../assets/css/rtl.css">
+</head>
+<body>
+    <nav aria-label="Main navigation" class="navbar navbar-expand-lg sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><i class="fas fa-leaf me-2 icon-bounce"></i>Yogastra</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="classes.html">Classes</a></li>
+                    <li class="nav-item"><a class="nav-link" href="instructors.html">Instructors</a></li>
+                    <li class="nav-item"><a class="nav-link" href="pricing.html">Pricing</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="blog.html">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+                <div class="d-flex align-items-center gap-3">
+                    <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle Dark Mode"><i class="fas fa-moon"></i></button>
+                    <button type="button" class="rtl-toggle" id="rtl-toggle" aria-label="Toggle RTL Mode"><i class="fas fa-language"></i></button>
+                    <a href="login.html" class="btn btn-outline-primary d-none d-lg-inline-flex">Member Login</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="py-5 bg-section text-center">
+        <div class="container py-4">
+            <h1 class="display-4 fw-bold">Journal</h1>
+            <p class="lead text-muted mx-auto" style="max-width: 600px;">Thoughts, tips, and inspiration for a mindful life.</p>
+        </div>
+    </header>
+
+    <section class="py-5 my-4">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-8">
+                    <!-- Filter Tabs -->
+                    <ul class="nav nav-pills mb-5 gap-2" id="blogFilterTabs">
+                        <li class="nav-item"><a class="nav-link active rounded-pill bg-primary" href="#" data-filter="All">All</a></li>
+                        <li class="nav-item"><a class="nav-link text-muted rounded-pill bg-white border" href="#" data-filter="Yoga Tips">Yoga Tips</a></li>
+                        <li class="nav-item"><a class="nav-link text-muted rounded-pill bg-white border" href="#" data-filter="Mindfulness">Mindfulness</a></li>
+                        <li class="nav-item"><a class="nav-link text-muted rounded-pill bg-white border" href="#" data-filter="Lifestyle">Lifestyle</a></li>
+                    </ul>
+
+                    <div class="row g-4" id="blogGrid">
+                        <!-- Post 1 -->
+                        <div class="col-md-6" data-page="1" data-category="Mindfulness">
+                            <div class="yoga-card h-100 d-flex flex-column">
+                                <div class="card-img-wrapper" style="aspect-ratio: 16/9;">
+                                    <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=600&q=80" alt="Meditation Post">
+                                </div>
+                                <div class="yoga-card-body flex-grow-1">
+                                    <span class="text-primary small fw-bold text-uppercase">Mindfulness</span>
+                                    <h4 class="mt-2 mb-3"><a href="blog-details.html" class="text-reset">5 Simple Steps to Start a Morning Meditation Practice</a></h4>
+                                    <p class="text-muted small mb-0">Starting your day with just 10 minutes of meditation can completely shift your mindset. Here is how to build a consistent habit...</p>
+                                </div>
+                                <div class="px-4 pb-4 pt-0 d-flex justify-content-between align-items-center">
+                                    <span class="small text-muted">May 12, 2026</span>
+                                    <a href="blog-details.html" class="fw-bold text-primary small">Read More <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Post 2 -->
+                        <div class="col-md-6" data-page="1" data-category="Yoga Tips">
+                            <div class="yoga-card h-100 d-flex flex-column">
+                                <div class="card-img-wrapper" style="aspect-ratio: 16/9;">
+                                    <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=600&q=80" alt="Yoga Post">
+                                </div>
+                                <div class="yoga-card-body flex-grow-1">
+                                    <span class="text-primary small fw-bold text-uppercase">Yoga Tips</span>
+                                    <h4 class="mt-2 mb-3"><a href="blog-details.html" class="text-reset">Mastering Chaturanga: Common Mistakes and Fixes</a></h4>
+                                    <p class="text-muted small mb-0">Chaturanga is a staple in Vinyasa flow, but it's often rushed. Learn the anatomical alignment to protect your shoulders...</p>
+                                </div>
+                                <div class="px-4 pb-4 pt-0 d-flex justify-content-between align-items-center">
+                                    <span class="small text-muted">May 05, 2026</span>
+                                    <a href="blog-details.html" class="fw-bold text-primary small">Read More <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Post 3 -->
+                        <div class="col-md-6" data-page="1" data-category="Lifestyle">
+                            <div class="yoga-card h-100 d-flex flex-column">
+                                <div class="card-img-wrapper" style="aspect-ratio: 16/9;">
+                                    <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=600&q=80" alt="Food Post">
+                                </div>
+                                <div class="yoga-card-body flex-grow-1">
+                                    <span class="text-primary small fw-bold text-uppercase">Lifestyle</span>
+                                    <h4 class="mt-2 mb-3"><a href="blog-details.html" class="text-reset">Plant-Based Pre-Workout Snacks</a></h4>
+                                    <p class="text-muted small mb-0">Fuel your body properly before hitting the mat. These 3 simple recipes will give you sustained energy without feeling heavy...</p>
+                                </div>
+                                <div class="px-4 pb-4 pt-0 d-flex justify-content-between align-items-center">
+                                    <span class="small text-muted">April 28, 2026</span>
+                                    <a href="blog-details.html" class="fw-bold text-primary small">Read More <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Post 4 -->
+                        <div class="col-md-6" data-page="1" data-category="Yoga Tips">
+                            <div class="yoga-card h-100 d-flex flex-column">
+                                <div class="card-img-wrapper" style="aspect-ratio: 16/9;">
+                                    <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=600&q=80" alt="Yoga Post">
+                                </div>
+                                <div class="yoga-card-body flex-grow-1">
+                                    <span class="text-primary small fw-bold text-uppercase">Yoga Tips</span>
+                                    <h4 class="mt-2 mb-3"><a href="blog-details.html" class="text-reset">The Benefits of Inversions</a></h4>
+                                    <p class="text-muted small mb-0">Going upside down can be intimidating, but the physical and mental benefits are profound. A guide for beginners...</p>
+                                </div>
+                                <div class="px-4 pb-4 pt-0 d-flex justify-content-between align-items-center">
+                                    <span class="small text-muted">April 15, 2026</span>
+                                    <a href="blog-details.html" class="fw-bold text-primary small">Read More <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Post 5 -->
+                        <div class="col-md-6 d-none" data-page="2" data-category="Yoga Tips">
+                            <div class="yoga-card h-100 d-flex flex-column">
+                                <div class="card-img-wrapper" style="aspect-ratio: 16/9;">
+                                    <img src="https://images.unsplash.com/photo-1552286450-4a669f880062?auto=format&fit=crop&w=600&q=80" alt="Yin Yoga Post">
+                                </div>
+                                <div class="yoga-card-body flex-grow-1">
+                                    <span class="text-primary small fw-bold text-uppercase">Yoga Tips</span>
+                                    <h4 class="mt-2 mb-3"><a href="blog-details.html" class="text-reset">Why Yin Yoga Belongs in Every Routine</a></h4>
+                                    <p class="text-muted small mb-0">Slow down and hold a pose for minutes, not seconds. Here's why restorative practice matters for recovery...</p>
+                                </div>
+                                <div class="px-4 pb-4 pt-0 d-flex justify-content-between align-items-center">
+                                    <span class="small text-muted">April 08, 2026</span>
+                                    <a href="blog-details.html" class="fw-bold text-primary small">Read More <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Post 6 -->
+                        <div class="col-md-6 d-none" data-page="2" data-category="Mindfulness">
+                            <div class="yoga-card h-100 d-flex flex-column">
+                                <div class="card-img-wrapper" style="aspect-ratio: 16/9;">
+                                    <img src="https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?auto=format&fit=crop&w=600&q=80" alt="Breathing Post">
+                                </div>
+                                <div class="yoga-card-body flex-grow-1">
+                                    <span class="text-primary small fw-bold text-uppercase">Mindfulness</span>
+                                    <h4 class="mt-2 mb-3"><a href="blog-details.html" class="text-reset">Breathwork 101: Pranayama for Beginners</a></h4>
+                                    <p class="text-muted small mb-0">Your breath is the bridge between body and mind. Try these three simple pranayama techniques today...</p>
+                                </div>
+                                <div class="px-4 pb-4 pt-0 d-flex justify-content-between align-items-center">
+                                    <span class="small text-muted">March 30, 2026</span>
+                                    <a href="blog-details.html" class="fw-bold text-primary small">Read More <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Post 7 -->
+                        <div class="col-md-6 d-none" data-page="2" data-category="Lifestyle">
+                            <div class="yoga-card h-100 d-flex flex-column">
+                                <div class="card-img-wrapper" style="aspect-ratio: 16/9;">
+                                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=600&q=80" alt="Hydration Post">
+                                </div>
+                                <div class="yoga-card-body flex-grow-1">
+                                    <span class="text-primary small fw-bold text-uppercase">Lifestyle</span>
+                                    <h4 class="mt-2 mb-3"><a href="blog-details.html" class="text-reset">Staying Hydrated Through a Hot Yoga Session</a></h4>
+                                    <p class="text-muted small mb-0">Hot yoga demands more from your body. Here's how to hydrate properly before, during, and after class...</p>
+                                </div>
+                                <div class="px-4 pb-4 pt-0 d-flex justify-content-between align-items-center">
+                                    <span class="small text-muted">March 22, 2026</span>
+                                    <a href="blog-details.html" class="fw-bold text-primary small">Read More <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Post 8 -->
+                        <div class="col-md-6 d-none" data-page="2" data-category="Mindfulness">
+                            <div class="yoga-card h-100 d-flex flex-column">
+                                <div class="card-img-wrapper" style="aspect-ratio: 16/9;">
+                                    <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80" alt="Sleep Post">
+                                </div>
+                                <div class="yoga-card-body flex-grow-1">
+                                    <span class="text-primary small fw-bold text-uppercase">Mindfulness</span>
+                                    <h4 class="mt-2 mb-3"><a href="blog-details.html" class="text-reset">A Gentle Bedtime Stretch Routine for Better Sleep</a></h4>
+                                    <p class="text-muted small mb-0">Wind down with this 10-minute sequence designed to calm your nervous system before bed...</p>
+                                </div>
+                                <div class="px-4 pb-4 pt-0 d-flex justify-content-between align-items-center">
+                                    <span class="small text-muted">March 14, 2026</span>
+                                    <a href="blog-details.html" class="fw-bold text-primary small">Read More <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pagination -->
+                    <nav class="mt-5" id="blogPaginationNav" aria-label="Blog pagination">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item disabled" id="blog-prev-item"><a class="page-link" href="#" id="blog-prev" tabindex="-1">Previous</a></li>
+                            <li class="page-item active"><a class="page-link" href="#" data-blog-page="1">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#" data-blog-page="2">2</a></li>
+                            <li class="page-item" id="blog-next-item"><a class="page-link" href="#" id="blog-next">Next</a></li>
+                        </ul>
+                    </nav>
+
+                    <!-- No Results -->
+                    <div class="text-center py-5 d-none" id="blogNoResults">
+                        <i class="fas fa-magnifying-glass text-muted mb-3" style="font-size: 2.5rem;"></i>
+                        <p class="text-muted mb-0">No articles match your search. Try a different keyword or category.</p>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="col-lg-4">
+                    <div class="bg-white p-4 rounded-4 shadow-sm mb-4">
+                        <h5 class="mb-4">Search</h5>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="blogSearchInput" placeholder="Search articles...">
+                            <button class="btn btn-primary" type="button" id="blogSearchBtn" aria-label="Search articles"><i class="fas fa-search"></i></button>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white p-4 rounded-4 shadow-sm mb-4">
+                        <h5 class="mb-4">Categories</h5>
+                        <ul class="list-unstyled mb-0">
+                            <li class="mb-2"><a href="blog.html" class="text-muted d-flex justify-content-between">Yoga Tips <span>(12)</span></a></li>
+                            <li class="mb-2"><a href="blog.html" class="text-muted d-flex justify-content-between">Mindfulness <span>(8)</span></a></li>
+                            <li class="mb-2"><a href="blog.html" class="text-muted d-flex justify-content-between">Lifestyle <span>(15)</span></a></li>
+                            <li class="mb-2"><a href="blog.html" class="text-muted d-flex justify-content-between">Nutrition <span>(6)</span></a></li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white p-4 rounded-4 shadow-sm">
+                        <h5 class="mb-4">Popular Posts</h5>
+                        <div class="d-flex mb-3 align-items-center">
+                            <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=100&q=80" alt="Thumb" class="rounded-3 me-3 object-fit-cover" width="60" height="60">
+                            <div>
+                                <h6 class="mb-1 small"><a href="blog-details.html" class="text-reset">5 Steps to Morning Meditation</a></h6>
+                                <span class="small text-muted">May 12, 2026</span>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=100&q=80" alt="Thumb" class="rounded-3 me-3 object-fit-cover" width="60" height="60">
+                            <div>
+                                <h6 class="mb-1 small"><a href="blog-details.html" class="text-reset">Plant-Based Pre-Workout</a></h6>
+                                <span class="small text-muted">April 28, 2026</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer mt-auto">
+        <div class="container text-center text-white-50">
+            <p class="mb-0">&copy; 2026 Yogastra. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script>
+        // Blog list: pagination + category filter + keyword search (combined)
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = Array.from(document.querySelectorAll('#blogGrid > [data-page]'));
+            const pageLinks = document.querySelectorAll('[data-blog-page]');
+            const prevItem = document.getElementById('blog-prev-item');
+            const nextItem = document.getElementById('blog-next-item');
+            const prevBtn = document.getElementById('blog-prev');
+            const nextBtn = document.getElementById('blog-next');
+            const paginationNav = document.getElementById('blogPaginationNav');
+            const filterTabs = document.querySelectorAll('#blogFilterTabs [data-filter]');
+            const searchInput = document.getElementById('blogSearchInput');
+            const searchBtn = document.getElementById('blogSearchBtn');
+            const noResults = document.getElementById('blogNoResults');
+            const totalPages = pageLinks.length;
+
+            let currentPage = 1;
+            let activeCategory = 'All';
+
+            function render() {
+                const term = searchInput.value.trim().toLowerCase();
+                const isFiltering = term.length > 0 || activeCategory !== 'All';
+                let visibleCount = 0;
+
+                paginationNav.classList.toggle('d-none', isFiltering);
+
+                cards.forEach(card => {
+                    const matchesCategory = activeCategory === 'All' || card.dataset.category === activeCategory;
+                    const titleEl = card.querySelector('h4 a');
+                    const title = titleEl ? titleEl.textContent.toLowerCase() : '';
+                    const matchesSearch = term.length === 0 || title.includes(term);
+
+                    const visible = isFiltering
+                        ? (matchesCategory && matchesSearch)
+                        : Number(card.dataset.page) === currentPage;
+
+                    card.classList.toggle('d-none', !visible);
+                    if (visible) visibleCount++;
+                });
+
+                noResults.classList.toggle('d-none', visibleCount > 0);
+
+                if (!isFiltering) {
+                    pageLinks.forEach(link => {
+                        link.closest('.page-item').classList.toggle('active', Number(link.dataset.blogPage) === currentPage);
+                    });
+                    prevItem.classList.toggle('disabled', currentPage === 1);
+                    nextItem.classList.toggle('disabled', currentPage === totalPages);
+                }
+            }
+
+            pageLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    currentPage = Number(link.dataset.blogPage);
+                    render();
+                });
+            });
+
+            prevBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (currentPage > 1) {
+                    currentPage--;
+                    render();
+                }
+            });
+
+            nextBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    render();
+                }
+            });
+
+            // Category filter tabs
+            filterTabs.forEach(tab => {
+                tab.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    activeCategory = tab.dataset.filter;
+                    currentPage = 1;
+
+                    filterTabs.forEach(t => {
+                        const isActive = t === tab;
+                        t.classList.toggle('active', isActive);
+                        t.classList.toggle('bg-primary', isActive);
+                        t.classList.toggle('bg-white', !isActive);
+                        t.classList.toggle('border', !isActive);
+                        t.classList.toggle('text-muted', !isActive);
+                    });
+
+                    render();
+                });
+            });
+
+            // Keyword search (live as you type + button click)
+            searchInput.addEventListener('input', render);
+            searchBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                render();
+            });
+            searchInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') e.preventDefault();
+            });
+        });
+    </script>
+</body>
+</html>
