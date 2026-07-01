@@ -61,34 +61,35 @@
             <!-- Filter Bar -->
             <div class="bg-white p-3 rounded-3 shadow-sm mb-5 d-flex flex-wrap gap-3 align-items-center justify-content-between">
                 <div class="d-flex flex-wrap gap-3">
-                    <select class="form-select w-auto" aria-label="Filter by Style">
-                        <option selected>All Styles</option>
-                        <option value="1">Hatha</option>
-                        <option value="2">Vinyasa</option>
-                        <option value="3">Yin</option>
-                        <option value="4">Meditation</option>
+                    <select class="form-select w-auto" id="filterStyle" aria-label="Filter by Style">
+                        <option value="all" selected>All Styles</option>
+                        <option value="Hatha">Hatha</option>
+                        <option value="Vinyasa">Vinyasa</option>
+                        <option value="Yin">Yin</option>
+                        <option value="Meditation">Meditation</option>
                     </select>
-                    <select class="form-select w-auto" aria-label="Filter by Level">
-                        <option selected>All Levels</option>
-                        <option value="1">Beginner</option>
-                        <option value="2">Intermediate</option>
-                        <option value="3">Advanced</option>
+                    <select class="form-select w-auto" id="filterLevel" aria-label="Filter by Level">
+                        <option value="all" selected>All Levels</option>
+                        <option value="Beginner">Beginner</option>
+                        <option value="Intermediate">Intermediate</option>
+                        <option value="Advanced">Advanced</option>
                     </select>
-                    <select class="form-select w-auto" aria-label="Filter by Day">
-                        <option selected>Any Day</option>
-                        <option value="1">Weekday</option>
-                        <option value="2">Weekend</option>
+                    <select class="form-select w-auto" id="filterDay" aria-label="Filter by Day">
+                        <option value="all" selected>Any Day</option>
+                        <option value="Weekday">Weekday</option>
+                        <option value="Weekend">Weekend</option>
                     </select>
+                    <button type="button" class="btn btn-link btn-sm text-decoration-none" id="clearClassFiltersBtn">Clear filters</button>
                 </div>
                 <div>
-                    <span class="text-muted small">Showing 6 Classes</span>
+                    <span class="text-muted small" id="classCountText">Showing 6 Classes</span>
                 </div>
             </div>
 
             <!-- Class Grid -->
             <div class="row g-4" id="classGrid">
                 <!-- Class 1 -->
-                <div class="col-md-6 col-lg-4" data-page="1">
+                <div class="col-md-6 col-lg-4" data-page="1" data-style="Hatha" data-level="Beginner" data-day="Weekday">
                     <div class="yoga-card">
                         <div class="card-img-wrapper" style="aspect-ratio: 16/9;">
                             <img src="https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?auto=format&fit=crop&w=600&q=80" alt="Hatha Foundation">
@@ -109,7 +110,7 @@
                     </div>
                 </div>
                 <!-- Class 2 -->
-                <div class="col-md-6 col-lg-4" data-page="1">
+                <div class="col-md-6 col-lg-4" data-page="1" data-style="Vinyasa" data-level="Intermediate" data-day="Weekday">
                     <div class="yoga-card">
                         <div class="card-img-wrapper" style="aspect-ratio: 16/9;">
                             <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=600&q=80" alt="Dynamic Vinyasa">
@@ -130,7 +131,7 @@
                     </div>
                 </div>
                 <!-- Class 3 -->
-                <div class="col-md-6 col-lg-4" data-page="1">
+                <div class="col-md-6 col-lg-4" data-page="1" data-style="Yin" data-level="All Levels" data-day="Weekday">
                     <div class="yoga-card">
                         <div class="card-img-wrapper" style="aspect-ratio: 16/9;">
                             <img src="https://images.unsplash.com/photo-1552286450-4a669f880062?auto=format&fit=crop&w=600&q=80" alt="Yin Restore">
@@ -151,7 +152,7 @@
                     </div>
                 </div>
                 <!-- Class 4 -->
-                <div class="col-md-6 col-lg-4 d-none" data-page="2">
+                <div class="col-md-6 col-lg-4 d-none" data-page="2" data-style="Vinyasa" data-level="Advanced" data-day="Weekday">
                     <div class="yoga-card">
                         <div class="card-img-wrapper" style="aspect-ratio: 16/9;">
                             <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=600&q=80" alt="Power Vinyasa">
@@ -172,7 +173,7 @@
                     </div>
                 </div>
                 <!-- Class 5 -->
-                <div class="col-md-6 col-lg-4 d-none" data-page="2">
+                <div class="col-md-6 col-lg-4 d-none" data-page="2" data-style="Meditation" data-level="All Levels" data-day="Weekday">
                     <div class="yoga-card">
                         <div class="card-img-wrapper" style="aspect-ratio: 16/9;">
                             <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=600&q=80" alt="Guided Meditation">
@@ -193,7 +194,7 @@
                     </div>
                 </div>
                 <!-- Class 6 -->
-                <div class="col-md-6 col-lg-4 d-none" data-page="2">
+                <div class="col-md-6 col-lg-4 d-none" data-page="2" data-style="Hatha" data-level="Beginner" data-day="Weekend">
                     <div class="yoga-card">
                         <div class="card-img-wrapper" style="aspect-ratio: 16/9;">
                             <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=600&q=80" alt="Gentle Hatha">
@@ -216,7 +217,7 @@
             </div>
 
             <!-- Pagination -->
-            <nav class="mt-5" aria-label="Class pagination">
+            <nav class="mt-5" id="classPaginationNav" aria-label="Class pagination">
                 <ul class="pagination justify-content-center">
                     <li class="page-item disabled" id="page-prev-item"><a class="page-link" href="#" id="page-prev" tabindex="-1">Previous</a></li>
                     <li class="page-item active"><a class="page-link" href="#" data-page-link="1">1</a></li>
@@ -224,6 +225,12 @@
                     <li class="page-item" id="page-next-item"><a class="page-link" href="#" id="page-next">Next</a></li>
                 </ul>
             </nav>
+
+            <!-- No Results -->
+            <div class="text-center py-5 d-none" id="classNoResults">
+                <i class="fas fa-magnifying-glass text-muted mb-3" style="font-size: 2.5rem;"></i>
+                <p class="text-muted mb-0">No classes match your filters. Try adjusting your search.</p>
+            </div>
         </div>
     </section>
 
@@ -239,48 +246,93 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../assets/js/main.js"></script>
     <script>
-        // Class list pagination (client-side, 3 classes per page)
+        // Class list: pagination + style/level/day filters (combined)
         document.addEventListener('DOMContentLoaded', () => {
-            const cards = document.querySelectorAll('#classGrid > [data-page]');
+            const cards = Array.from(document.querySelectorAll('#classGrid > [data-page]'));
             const pageLinks = document.querySelectorAll('[data-page-link]');
             const prevItem = document.getElementById('page-prev-item');
             const nextItem = document.getElementById('page-next-item');
             const prevBtn = document.getElementById('page-prev');
             const nextBtn = document.getElementById('page-next');
+            const paginationNav = document.getElementById('classPaginationNav');
+            const noResults = document.getElementById('classNoResults');
+            const countText = document.getElementById('classCountText');
+            const filterStyle = document.getElementById('filterStyle');
+            const filterLevel = document.getElementById('filterLevel');
+            const filterDay = document.getElementById('filterDay');
+            const clearBtn = document.getElementById('clearClassFiltersBtn');
             const totalPages = pageLinks.length;
             let currentPage = 1;
 
-            function showPage(page) {
-                if (page < 1 || page > totalPages) return;
-                currentPage = page;
+            function render() {
+                const styleVal = filterStyle.value;
+                const levelVal = filterLevel.value;
+                const dayVal = filterDay.value;
+                const isFiltering = styleVal !== 'all' || levelVal !== 'all' || dayVal !== 'all';
+                let visibleCount = 0;
+
+                paginationNav.classList.toggle('d-none', isFiltering);
 
                 cards.forEach(card => {
-                    card.classList.toggle('d-none', Number(card.dataset.page) !== page);
+                    const matchesStyle = styleVal === 'all' || card.dataset.style === styleVal;
+                    const matchesLevel = levelVal === 'all' || card.dataset.level === levelVal || card.dataset.level === 'All Levels';
+                    const matchesDay = dayVal === 'all' || card.dataset.day === dayVal;
+
+                    const visible = isFiltering
+                        ? (matchesStyle && matchesLevel && matchesDay)
+                        : Number(card.dataset.page) === currentPage;
+
+                    card.classList.toggle('d-none', !visible);
+                    if (visible) visibleCount++;
                 });
 
-                pageLinks.forEach(link => {
-                    link.closest('.page-item').classList.toggle('active', Number(link.dataset.pageLink) === page);
-                });
+                noResults.classList.toggle('d-none', visibleCount > 0);
+                countText.textContent = isFiltering
+                    ? `Showing ${visibleCount} of ${cards.length} Classes`
+                    : `Showing ${cards.length} Classes`;
 
-                prevItem.classList.toggle('disabled', page === 1);
-                nextItem.classList.toggle('disabled', page === totalPages);
+                if (!isFiltering) {
+                    pageLinks.forEach(link => {
+                        link.closest('.page-item').classList.toggle('active', Number(link.dataset.pageLink) === currentPage);
+                    });
+                    prevItem.classList.toggle('disabled', currentPage === 1);
+                    nextItem.classList.toggle('disabled', currentPage === totalPages);
+                }
             }
 
             pageLinks.forEach(link => {
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
-                    showPage(Number(link.dataset.pageLink));
+                    currentPage = Number(link.dataset.pageLink);
+                    render();
                 });
             });
 
             prevBtn.addEventListener('click', (e) => {
                 e.preventDefault();
-                showPage(currentPage - 1);
+                if (currentPage > 1) {
+                    currentPage--;
+                    render();
+                }
             });
 
             nextBtn.addEventListener('click', (e) => {
                 e.preventDefault();
-                showPage(currentPage + 1);
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    render();
+                }
+            });
+
+            [filterStyle, filterLevel, filterDay].forEach(select => {
+                select.addEventListener('change', render);
+            });
+
+            clearBtn.addEventListener('click', () => {
+                filterStyle.value = 'all';
+                filterLevel.value = 'all';
+                filterDay.value = 'all';
+                render();
             });
         });
     </script>
