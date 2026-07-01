@@ -125,55 +125,99 @@
             <h2 class="fw-bold m-0">Settings</h2>
             <button class="btn btn-primary"><i class="fas fa-save me-2"></i> Save Changes</button>
         </div>
-        
+
         <div class="row g-4">
-            <div class="col-lg-4">
-                <div class="admin-card text-center text-md-start">
-                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" alt="Profile" class="rounded-circle mb-3 border" style="width:120px; height:120px; object-fit:cover;">
-                    <h5 class="fw-bold">Kiran Rani</h5>
-                    <p class="text-muted mb-3">Super Admin</p>
-                    <button class="btn btn-outline-primary btn-sm w-100 mb-2">Change Photo</button>
-                    <button class="btn btn-outline-danger btn-sm w-100">Remove Photo</button>
-                </div>
-            </div>
-            <div class="col-lg-8">
+            <div class="col-lg-6">
                 <div class="admin-card">
-                    <h5 class="fw-bold mb-4">Basic Information</h5>
+                    <h5 class="fw-bold mb-4">General Settings</h5>
                     <form>
                         <div class="row g-3">
-                            <div class="col-md-6">
-                                <label class="form-label">First Name</label>
-                                <input type="text" class="form-control" value="Kiran">
+                            <div class="col-12">
+                                <label class="form-label">Studio Name</label>
+                                <input type="text" class="form-control" value="Yogastra">
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">Support Email</label>
+                                <input type="email" class="form-control" value="hello@yogastra.com">
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label">Last Name</label>
-                                <input type="text" class="form-control" value="Rani">
+                                <label class="form-label">Timezone</label>
+                                <select class="form-select">
+                                    <option selected>(GMT-08:00) Pacific Time</option>
+                                    <option>(GMT-05:00) Eastern Time</option>
+                                    <option>(GMT+00:00) London</option>
+                                    <option>(GMT+05:30) India Standard Time</option>
+                                </select>
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label">Email Address</label>
-                                <input type="email" class="form-control" value="admin@yogastra.com">
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">Phone Number</label>
-                                <input type="tel" class="form-control" value="+1 234 567 890">
-                            </div>
-                            <div class="col-12 mt-4">
-                                <h5 class="fw-bold mb-3">Change Password</h5>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">New Password</label>
-                                <input type="password" class="form-control" placeholder="••••••••">
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">Confirm Password</label>
-                                <input type="password" class="form-control" placeholder="••••••••">
+                                <label class="form-label">Currency</label>
+                                <select class="form-select">
+                                    <option selected>USD ($)</option>
+                                    <option>EUR (€)</option>
+                                    <option>GBP (£)</option>
+                                    <option>INR (₹)</option>
+                                </select>
                             </div>
                         </div>
                     </form>
                 </div>
+
+                <div class="admin-card mt-4">
+                    <h5 class="fw-bold mb-4">Business Hours</h5>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label small text-muted">Monday - Friday</label>
+                            <div class="input-group">
+                                <input type="time" class="form-control" value="06:00">
+                                <span class="input-group-text">to</span>
+                                <input type="time" class="form-control" value="21:00">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label small text-muted">Weekends</label>
+                            <div class="input-group">
+                                <input type="time" class="form-control" value="07:00">
+                                <span class="input-group-text">to</span>
+                                <input type="time" class="form-control" value="19:00">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="admin-card">
+                    <h5 class="fw-bold mb-4">Notification Preferences</h5>
+                    <div class="form-check form-switch mb-3">
+                        <input class="form-check-input" type="checkbox" role="switch" id="notifNewBooking" checked>
+                        <label class="form-check-label" for="notifNewBooking">Email me on new class bookings</label>
+                    </div>
+                    <div class="form-check form-switch mb-3">
+                        <input class="form-check-input" type="checkbox" role="switch" id="notifPaymentFailed" checked>
+                        <label class="form-check-label" for="notifPaymentFailed">Alert me on failed payments</label>
+                    </div>
+                    <div class="form-check form-switch mb-3">
+                        <input class="form-check-input" type="checkbox" role="switch" id="notifNewMessage" checked>
+                        <label class="form-check-label" for="notifNewMessage">Notify me of new contact messages</label>
+                    </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="notifWeeklySummary">
+                        <label class="form-check-label" for="notifWeeklySummary">Send me a weekly summary report</label>
+                    </div>
+                </div>
+
+                <div class="admin-card mt-4">
+                    <h5 class="fw-bold mb-2">Maintenance Mode</h5>
+                    <p class="text-muted small mb-3">Temporarily take the public site offline for visitors while you make changes. Admin panel access stays active.</p>
+                    <div class="form-check form-switch mb-3">
+                        <input class="form-check-input" type="checkbox" role="switch" id="maintenanceModeToggle">
+                        <label class="form-check-label" for="maintenanceModeToggle">Enable maintenance mode</label>
+                    </div>
+                    <a href="maintenance.html" class="btn btn-outline-secondary btn-sm"><i class="fas fa-eye me-2"></i>Preview Maintenance Page</a>
+                </div>
             </div>
         </div>
-        
+
             </main>
         </div>
     </div>
