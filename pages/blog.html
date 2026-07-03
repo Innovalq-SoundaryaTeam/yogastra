@@ -226,11 +226,10 @@
                     
                     <div class="bg-white p-4 rounded-4 shadow-sm mb-4">
                         <h5 class="mb-4">Categories</h5>
-                        <ul class="list-unstyled mb-0">
-                            <li class="mb-2"><a href="blog.html" class="text-muted d-flex justify-content-between">Yoga Tips <span>(12)</span></a></li>
-                            <li class="mb-2"><a href="blog.html" class="text-muted d-flex justify-content-between">Mindfulness <span>(8)</span></a></li>
-                            <li class="mb-2"><a href="blog.html" class="text-muted d-flex justify-content-between">Lifestyle <span>(15)</span></a></li>
-                            <li class="mb-2"><a href="blog.html" class="text-muted d-flex justify-content-between">Nutrition <span>(6)</span></a></li>
+                        <ul class="list-unstyled mb-0" id="blogCategoryList">
+                            <li class="mb-2"><a href="#" class="text-muted d-flex justify-content-between" data-filter="Yoga Tips">Yoga Tips <span data-count-for="Yoga Tips">0</span></a></li>
+                            <li class="mb-2"><a href="#" class="text-muted d-flex justify-content-between" data-filter="Mindfulness">Mindfulness <span data-count-for="Mindfulness">0</span></a></li>
+                            <li class="mb-2"><a href="#" class="text-muted d-flex justify-content-between" data-filter="Lifestyle">Lifestyle <span data-count-for="Lifestyle">0</span></a></li>
                         </ul>
                     </div>
 
@@ -275,6 +274,7 @@
             const nextBtn = document.getElementById('blog-next');
             const paginationNav = document.getElementById('blogPaginationNav');
             const filterTabs = document.querySelectorAll('#blogFilterTabs [data-filter]');
+            const categoryLinks = document.querySelectorAll('#blogCategoryList [data-filter]');
             const searchInput = document.getElementById('blogSearchInput');
             const searchBtn = document.getElementById('blogSearchBtn');
             const noResults = document.getElementById('blogNoResults');
@@ -339,24 +339,43 @@
                 }
             });
 
-            // Category filter tabs
+            // Category filter tabs + sidebar Categories widget (share one filter state)
+            function setCategory(category) {
+                activeCategory = category;
+                currentPage = 1;
+
+                filterTabs.forEach(t => {
+                    const isActive = t.dataset.filter === category;
+                    t.classList.toggle('active', isActive);
+                    t.classList.toggle('bg-primary', isActive);
+                    t.classList.toggle('bg-white', !isActive);
+                    t.classList.toggle('border', !isActive);
+                    t.classList.toggle('text-muted', !isActive);
+                });
+
+                render();
+                document.getElementById('blogGrid').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+
             filterTabs.forEach(tab => {
                 tab.addEventListener('click', (e) => {
                     e.preventDefault();
-                    activeCategory = tab.dataset.filter;
-                    currentPage = 1;
-
-                    filterTabs.forEach(t => {
-                        const isActive = t === tab;
-                        t.classList.toggle('active', isActive);
-                        t.classList.toggle('bg-primary', isActive);
-                        t.classList.toggle('bg-white', !isActive);
-                        t.classList.toggle('border', !isActive);
-                        t.classList.toggle('text-muted', !isActive);
-                    });
-
-                    render();
+                    setCategory(tab.dataset.filter);
                 });
+            });
+
+            categoryLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    setCategory(link.dataset.filter);
+                });
+            });
+
+            // Populate real category counts in the sidebar from the actual post data
+            document.querySelectorAll('#blogCategoryList [data-count-for]').forEach(span => {
+                const category = span.dataset.countFor;
+                const count = cards.filter(card => card.dataset.category === category).length;
+                span.textContent = `(${count})`;
             });
 
             // Keyword search (live as you type + button click)
