@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="5 Simple Steps to Start a Morning Meditation Practice">
+    <meta name="description" content="Yogastra blog post." id="metaDescription">
     <title>Blog Details | Yogastra</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -45,37 +45,21 @@
                 <div class="col-lg-8">
                     <!-- Post Header -->
                     <div class="text-center mb-5">
-                        <span class="text-primary small fw-bold text-uppercase mb-2 d-block">Mindfulness</span>
-                        <h1 class="display-5 fw-bold mb-4">5 Simple Steps to Start a Morning Meditation Practice</h1>
+                        <span class="text-primary small fw-bold text-uppercase mb-2 d-block" id="postCategory">Mindfulness</span>
+                        <h1 class="display-5 fw-bold mb-4" id="postTitle">5 Simple Steps to Start a Morning Meditation Practice</h1>
                         <div class="d-flex align-items-center justify-content-center gap-3 text-muted small">
-                            <span><i class="far fa-calendar me-1"></i> May 12, 2026</span>
-                            <span><i class="far fa-user me-1"></i> Kiran Rani</span>
-                            <span><i class="far fa-clock me-1"></i> 5 Min Read</span>
+                            <span><i class="far fa-calendar me-1"></i> <span id="postDate">May 12, 2026</span></span>
+                            <span><i class="far fa-user me-1"></i> <span id="postAuthor">Kiran Rani</span></span>
+                            <span><i class="far fa-clock me-1"></i> <span id="postReadTime">5 Min Read</span></span>
                         </div>
                     </div>
 
                     <!-- Hero Image -->
-                    <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=1200&q=80" alt="Meditation" class="img-fluid rounded-4 shadow-sm mb-5">
+                    <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=1200&q=80" alt="Blog post" class="img-fluid rounded-4 shadow-sm mb-5" id="postImage">
 
                     <!-- Content -->
-                    <div class="blog-content mb-5" style="font-size: 1.1rem; line-height: 1.8;">
-                        <p>Starting your day with just 10 minutes of meditation can completely shift your mindset. Here is how to build a consistent habit.</p>
-                        
-                        <h4 class="mt-5 mb-3">1. Start Small</h4>
-                        <p>Don't try to sit for an hour on your first day. Start with just 5 to 10 minutes. The goal is consistency, not duration. As the habit forms, you can gradually increase the time.</p>
-                        
-                        <h4 class="mt-4 mb-3">2. Create a Dedicated Space</h4>
-                        <p>Having a specific spot where you meditate signals to your brain that it's time to relax. It doesn't need to be an entire room—a corner with a comfortable cushion and maybe a candle is perfect.</p>
-                        
-                        <blockquote class="blockquote bg-section p-4 rounded-3 my-4 border-start border-primary border-4 text-dark">
-                            <p class="mb-0 font-italic">"Meditation is not evasion; it is a serene encounter with reality."</p>
-                            <footer class="blockquote-footer mt-2">Thích Nhất Hạnh</footer>
-                        </blockquote>
-                        
-                        <h4 class="mt-4 mb-3">3. Focus on the Breath</h4>
-                        <p>When you sit, simply observe your breath. Notice the sensation of air entering and leaving your nostrils. When your mind wanders (and it will), gently bring your focus back to the breath without judgment.</p>
-                        
-                        <p>Remember, the goal is not to clear your mind entirely, but to become aware of your thoughts without getting caught up in them.</p>
+                    <div class="blog-content mb-5" style="font-size: 1.1rem; line-height: 1.8;" id="postContent">
+                        <p>Loading article...</p>
                     </div>
 
                     <!-- Share -->
@@ -90,11 +74,17 @@
 
                     <!-- Author Bio -->
                     <div class="bg-white p-4 rounded-4 shadow-sm mb-5 d-flex align-items-center">
-                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" alt="Kiran Rani" class="rounded-circle avatar-circle me-4">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" alt="Author" class="rounded-circle avatar-circle me-4" id="authorImage">
                         <div>
-                            <h5 class="mb-1">Kiran Rani</h5>
-                            <p class="text-muted small mb-0">Yin &amp; Meditation Instructor at Yogastra. Kirancreates a nurturing environment for deep release and incorporates mindfulness into daily living.</p>
+                            <h5 class="mb-1" id="authorName">Kiran Rani</h5>
+                            <p class="text-muted small mb-0" id="authorBio">Yin &amp; Meditation Instructor at Yogastra.</p>
                         </div>
+                    </div>
+
+                    <!-- Related Posts -->
+                    <div class="mb-5">
+                        <h4 class="mb-4">More From the Blog</h4>
+                        <div class="row g-4" id="relatedPosts"></div>
                     </div>
 
                     <!-- Comments Form -->
@@ -133,5 +123,251 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../assets/js/main.js"></script>
+    <script>
+        // Blog post data — each entry mirrors the cards on blog.html so that
+        // "Read More" / post title / Popular Posts links (which all pass
+        // ?post=N) load the correct article instead of always showing the
+        // same hardcoded content.
+        const BLOG_POSTS = {
+            1: {
+                category: 'Mindfulness',
+                title: '5 Simple Steps to Start a Morning Meditation Practice',
+                date: 'May 12, 2026',
+                author: 'Kiran Rani',
+                readTime: '5 Min Read',
+                image: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=1200&q=80',
+                content: `
+                    <p>Starting your day with just 10 minutes of meditation can completely shift your mindset. Here is how to build a consistent habit.</p>
+                    <h4 class="mt-5 mb-3">1. Start Small</h4>
+                    <p>Don't try to sit for an hour on your first day. Start with just 5 to 10 minutes. The goal is consistency, not duration. As the habit forms, you can gradually increase the time.</p>
+                    <h4 class="mt-4 mb-3">2. Create a Dedicated Space</h4>
+                    <p>Having a specific spot where you meditate signals to your brain that it's time to relax. It doesn't need to be an entire room&mdash;a corner with a comfortable cushion and maybe a candle is perfect.</p>
+                    <blockquote class="blockquote bg-section p-4 rounded-3 my-4 border-start border-primary border-4 text-dark">
+                        <p class="mb-0 font-italic">"Meditation is not evasion; it is a serene encounter with reality."</p>
+                        <footer class="blockquote-footer mt-2">Thích Nhất Hạnh</footer>
+                    </blockquote>
+                    <h4 class="mt-4 mb-3">3. Focus on the Breath</h4>
+                    <p>When you sit, simply observe your breath. Notice the sensation of air entering and leaving your nostrils. When your mind wanders (and it will), gently bring your focus back to the breath without judgment.</p>
+                    <p>Remember, the goal is not to clear your mind entirely, but to become aware of your thoughts without getting caught up in them.</p>
+                `
+            },
+            2: {
+                category: 'Yoga Tips',
+                title: 'Mastering Chaturanga: Common Mistakes and Fixes',
+                date: 'May 05, 2026',
+                author: 'Sarah Jenkins',
+                readTime: '6 Min Read',
+                image: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=1200&q=80',
+                content: `
+                    <p>Chaturanga is a staple in Vinyasa flow, but it's often rushed. Learn the anatomical alignment to protect your shoulders and build real strength in this transitional pose.</p>
+                    <h4 class="mt-5 mb-3">1. Keep Your Elbows Close</h4>
+                    <p>Letting your elbows flare outward puts unnecessary strain on the shoulder joint. Hug them in toward your ribs as you lower, so your triceps do the work instead of your shoulders.</p>
+                    <h4 class="mt-4 mb-3">2. Don't Sink Below 90 Degrees</h4>
+                    <p>Dropping your shoulders below elbow height compresses the front of the shoulder and can lead to injury over time. Stop the descent once your upper arms are parallel to the floor.</p>
+                    <blockquote class="blockquote bg-section p-4 rounded-3 my-4 border-start border-primary border-4 text-dark">
+                        <p class="mb-0 font-italic">"Strength built slowly is strength that lasts."</p>
+                        <footer class="blockquote-footer mt-2">Sarah Jenkins</footer>
+                    </blockquote>
+                    <h4 class="mt-4 mb-3">3. Build Strength With Regression</h4>
+                    <p>If full Chaturanga isn't accessible yet, practice from the knees. There's no shame in the modification&mdash;it's how you build the strength to do the full pose safely.</p>
+                `
+            },
+            3: {
+                category: 'Lifestyle',
+                title: 'Plant-Based Pre-Workout Snacks',
+                date: 'April 28, 2026',
+                author: 'David Chen',
+                readTime: '4 Min Read',
+                image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=1200&q=80',
+                content: `
+                    <p>Fuel your body properly before hitting the mat. These three simple recipes will give you sustained energy without feeling heavy.</p>
+                    <h4 class="mt-5 mb-3">1. Banana with Almond Butter</h4>
+                    <p>Quick-digesting carbs paired with healthy fat give you steady energy for a full flow class without weighing you down.</p>
+                    <h4 class="mt-4 mb-3">2. Dates and Walnuts</h4>
+                    <p>A handful of dates with a few walnuts is a classic pre-workout combo&mdash;natural sugars for fast fuel, and fat for sustained energy.</p>
+                    <blockquote class="blockquote bg-section p-4 rounded-3 my-4 border-start border-primary border-4 text-dark">
+                        <p class="mb-0 font-italic">"Food is fuel&mdash;eat like your practice depends on it, because it does."</p>
+                        <footer class="blockquote-footer mt-2">David Chen</footer>
+                    </blockquote>
+                    <h4 class="mt-4 mb-3">3. Oat and Chia Energy Balls</h4>
+                    <p>Prep a batch ahead of time and keep them in the fridge. They're easy to grab on your way out the door to class.</p>
+                `
+            },
+            4: {
+                category: 'Yoga Tips',
+                title: 'The Benefits of Inversions',
+                date: 'April 15, 2026',
+                author: 'Sarah Jenkins',
+                readTime: '5 Min Read',
+                image: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=1200&q=80',
+                content: `
+                    <p>Going upside down can be intimidating, but the physical and mental benefits are profound. Here's a guide for beginners easing into inverted postures.</p>
+                    <h4 class="mt-5 mb-3">1. Start With Legs Up the Wall</h4>
+                    <p>This gentle, fully supported inversion introduces your body to the sensation of being inverted without any of the risk of a full headstand or handstand.</p>
+                    <h4 class="mt-4 mb-3">2. Build Shoulder and Core Strength First</h4>
+                    <p>Inversions like headstand rely on a stable foundation. Spend time on planks and shoulder work before attempting to hold weight on your head or hands.</p>
+                    <blockquote class="blockquote bg-section p-4 rounded-3 my-4 border-start border-primary border-4 text-dark">
+                        <p class="mb-0 font-italic">"A new perspective, literally, changes how you see everything else."</p>
+                        <footer class="blockquote-footer mt-2">Sarah Jenkins</footer>
+                    </blockquote>
+                    <h4 class="mt-4 mb-3">3. Always Warm Up the Neck and Wrists</h4>
+                    <p>These joints bear extra load in inversions. A few minutes of gentle mobility work before class goes a long way toward practicing safely.</p>
+                `
+            },
+            5: {
+                category: 'Yoga Tips',
+                title: 'Why Yin Yoga Belongs in Every Routine',
+                date: 'April 08, 2026',
+                author: 'Kiran Rani',
+                readTime: '5 Min Read',
+                image: 'https://images.unsplash.com/photo-1552286450-4a669f880062?auto=format&fit=crop&w=1200&q=80',
+                content: `
+                    <p>Slow down and hold a pose for minutes, not seconds. Here's why restorative practice matters for recovery, even if your regular routine is fast-paced.</p>
+                    <h4 class="mt-5 mb-3">1. It Targets Connective Tissue, Not Muscle</h4>
+                    <p>Where Vinyasa builds muscular strength, Yin works the fascia, ligaments, and joints&mdash;areas that need long, gentle holds to actually change.</p>
+                    <h4 class="mt-4 mb-3">2. It Balances an Active Practice</h4>
+                    <p>If most of your week is spent in dynamic flows, Yin gives your nervous system a chance to shift out of "go" mode and into genuine rest.</p>
+                    <blockquote class="blockquote bg-section p-4 rounded-3 my-4 border-start border-primary border-4 text-dark">
+                        <p class="mb-0 font-italic">"Stillness is not the absence of movement&mdash;it's a different kind of work."</p>
+                        <footer class="blockquote-footer mt-2">Kiran Rani</footer>
+                    </blockquote>
+                    <h4 class="mt-4 mb-3">3. It Trains Patience and Stillness</h4>
+                    <p>Holding a pose for three to five minutes will test your mind more than your body. That discomfort is exactly where the growth happens.</p>
+                `
+            },
+            6: {
+                category: 'Mindfulness',
+                title: 'Breathwork 101: Pranayama for Beginners',
+                date: 'March 30, 2026',
+                author: 'Kiran Rani',
+                readTime: '4 Min Read',
+                image: 'https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?auto=format&fit=crop&w=1200&q=80',
+                content: `
+                    <p>Your breath is the bridge between body and mind. Try these three simple pranayama techniques today to calm your nervous system.</p>
+                    <h4 class="mt-5 mb-3">1. Equal Breathing (Sama Vritti)</h4>
+                    <p>Inhale for a count of four, exhale for a count of four. This simple rhythm is one of the fastest ways to steady a racing mind.</p>
+                    <h4 class="mt-4 mb-3">2. Alternate Nostril Breathing (Nadi Shodhana)</h4>
+                    <p>Using your thumb and ring finger to alternate airflow between nostrils is said to balance the two hemispheres of the brain, leaving you calm and clear.</p>
+                    <blockquote class="blockquote bg-section p-4 rounded-3 my-4 border-start border-primary border-4 text-dark">
+                        <p class="mb-0 font-italic">"For every minute you are angry you lose sixty seconds of peace of mind. The breath brings you back."</p>
+                        <footer class="blockquote-footer mt-2">Kiran Rani</footer>
+                    </blockquote>
+                    <h4 class="mt-4 mb-3">3. Ocean Breath (Ujjayi)</h4>
+                    <p>A slight constriction at the back of the throat creates an audible, ocean-like sound on both the inhale and exhale&mdash;perfect for anchoring focus during a flow class.</p>
+                `
+            },
+            7: {
+                category: 'Lifestyle',
+                title: 'Staying Hydrated Through a Hot Yoga Session',
+                date: 'March 22, 2026',
+                author: 'David Chen',
+                readTime: '4 Min Read',
+                image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=1200&q=80',
+                content: `
+                    <p>Hot yoga demands more from your body. Here's how to hydrate properly before, during, and after class so you can practice safely.</p>
+                    <h4 class="mt-5 mb-3">1. Hydrate Hours Before, Not Minutes Before</h4>
+                    <p>Chugging water right before class can leave you uncomfortable and bloated. Spread your intake across the day instead.</p>
+                    <h4 class="mt-4 mb-3">2. Replace Electrolytes, Not Just Water</h4>
+                    <p>Heavy sweating flushes out sodium and potassium along with water. A pinch of salt or an electrolyte drink helps your body actually retain the fluids you take in.</p>
+                    <blockquote class="blockquote bg-section p-4 rounded-3 my-4 border-start border-primary border-4 text-dark">
+                        <p class="mb-0 font-italic">"Hydration is preparation, not an afterthought."</p>
+                        <footer class="blockquote-footer mt-2">David Chen</footer>
+                    </blockquote>
+                    <h4 class="mt-4 mb-3">3. Rehydrate Slowly After Class</h4>
+                    <p>Sip steadily for the hour after a hot class rather than drinking a large volume at once, so your body can actually absorb it.</p>
+                `
+            },
+            8: {
+                category: 'Mindfulness',
+                title: 'A Gentle Bedtime Stretch Routine for Better Sleep',
+                date: 'March 14, 2026',
+                author: 'Kiran Rani',
+                readTime: '5 Min Read',
+                image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=1200&q=80',
+                content: `
+                    <p>Wind down with this 10-minute sequence designed to calm your nervous system before bed.</p>
+                    <h4 class="mt-5 mb-3">1. Seated Forward Fold</h4>
+                    <p>Folding forward gently signals to your nervous system that it's safe to relax. Let your head hang heavy and your breath slow down.</p>
+                    <h4 class="mt-4 mb-3">2. Legs Up the Wall</h4>
+                    <p>This restorative pose eases tired legs and encourages blood flow back toward the heart&mdash;ideal for winding down after a long day.</p>
+                    <blockquote class="blockquote bg-section p-4 rounded-3 my-4 border-start border-primary border-4 text-dark">
+                        <p class="mb-0 font-italic">"Rest is not idleness. It is part of the practice."</p>
+                        <footer class="blockquote-footer mt-2">Kiran Rani</footer>
+                    </blockquote>
+                    <h4 class="mt-4 mb-3">3. Supported Child's Pose</h4>
+                    <p>Use a bolster or pillow under your torso for extra support, and stay here for at least ten slow breaths before heading to bed.</p>
+                `
+            }
+        };
+
+        const AUTHOR_INFO = {
+            'Kiran Rani': {
+                image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80',
+                bio: 'Yin &amp; Meditation Instructor at Yogastra. Kiran creates a nurturing environment for deep release and incorporates mindfulness into daily living.'
+            },
+            'Sarah Jenkins': {
+                image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=150&q=80',
+                bio: 'Vinyasa Specialist at Yogastra, RYT-500 certified with 10 years of teaching dynamic, breath-linked flows.'
+            },
+            'David Chen': {
+                image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80',
+                bio: 'Hatha Master at Yogastra, focused on alignment, breathwork, and building foundational strength.'
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const postId = Number(params.get('post')) || 1;
+            const post = BLOG_POSTS[postId] || BLOG_POSTS[1];
+            const author = AUTHOR_INFO[post.author] || AUTHOR_INFO['Kiran Rani'];
+
+            document.title = `${post.title} | Yogastra`;
+            const metaDesc = document.getElementById('metaDescription');
+            if (metaDesc) metaDesc.setAttribute('content', post.title);
+
+            document.getElementById('postCategory').textContent = post.category;
+            document.getElementById('postTitle').textContent = post.title;
+            document.getElementById('postDate').textContent = post.date;
+            document.getElementById('postAuthor').textContent = post.author;
+            document.getElementById('postReadTime').textContent = post.readTime;
+
+            const img = document.getElementById('postImage');
+            img.src = post.image;
+            img.alt = post.title;
+
+            document.getElementById('postContent').innerHTML = post.content;
+
+            document.getElementById('authorImage').src = author.image;
+            document.getElementById('authorImage').alt = post.author;
+            document.getElementById('authorName').textContent = post.author;
+            document.getElementById('authorBio').innerHTML = author.bio;
+
+            // Related posts: up to 3 other posts, preferring the same category
+            const relatedContainer = document.getElementById('relatedPosts');
+            const allIds = Object.keys(BLOG_POSTS).map(Number).filter(id => id !== postId);
+            const sameCategory = allIds.filter(id => BLOG_POSTS[id].category === post.category);
+            const otherCategory = allIds.filter(id => BLOG_POSTS[id].category !== post.category);
+            const relatedIds = [...sameCategory, ...otherCategory].slice(0, 3);
+
+            relatedContainer.innerHTML = relatedIds.map(id => {
+                const p = BLOG_POSTS[id];
+                return `
+                    <div class="col-md-4">
+                        <a href="blog-details.html?post=${id}" class="text-reset text-decoration-none">
+                            <div class="yoga-card h-100">
+                                <div class="card-img-wrapper" style="aspect-ratio: 16/9;">
+                                    <img src="${p.image.replace('w=1200', 'w=400')}" alt="${p.title}">
+                                </div>
+                                <div class="yoga-card-body">
+                                    <span class="text-primary small fw-bold text-uppercase">${p.category}</span>
+                                    <h6 class="mt-2 mb-0">${p.title}</h6>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                `;
+            }).join('');
+        });
+    </script>
 </body>
 </html>
