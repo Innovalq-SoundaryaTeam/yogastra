@@ -134,7 +134,7 @@
                             <p class="text-muted small mb-4">with Kiran Rani</p>
 
                             <div class="mt-auto pt-3 border-top">
-                                <button type="button" class="btn btn-outline-primary w-100">Join Waitlist</button>
+                                <button type="button" class="btn btn-outline-primary w-100 btn-join-waitlist" data-class-name="Mindful Meditation">Join Waitlist</button>
                             </div>
                         </div>
                     </div>
@@ -162,6 +162,16 @@
                 </div>
             </div>
         </main>
+    </div>
+
+    <!-- Waitlist Toast -->
+    <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1080;">
+        <div id="waitlistToast" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body" id="waitlistToastBody"><i class="fas fa-check-circle me-2"></i>You're on the waitlist!</div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
     </div>
 
     <!-- Booking Modal -->
@@ -228,6 +238,41 @@
                 filterStyle.value = 'any';
                 filterInstructor.value = 'any';
                 applyFilters();
+            });
+        });
+    </script>
+    <script>
+        // Join Waitlist button
+        document.addEventListener('DOMContentLoaded', () => {
+            const toastEl = document.getElementById('waitlistToast');
+            const toastBody = document.getElementById('waitlistToastBody');
+            let hideTimer = null;
+
+            function showToast(message) {
+                if (!toastEl) return;
+                toastBody.innerHTML = `<i class="fas fa-check-circle me-2"></i>${message}`;
+                clearTimeout(hideTimer);
+                toastEl.classList.add('show');
+                hideTimer = setTimeout(() => toastEl.classList.remove('show'), 4500);
+            }
+
+            const closeBtn = toastEl ? toastEl.querySelector('.btn-close') : null;
+            if (closeBtn) {
+                closeBtn.addEventListener('click', () => {
+                    clearTimeout(hideTimer);
+                    toastEl.classList.remove('show');
+                });
+            }
+
+            document.querySelectorAll('.btn-join-waitlist').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const className = btn.dataset.className || 'this class';
+                    btn.disabled = true;
+                    btn.classList.remove('btn-outline-primary');
+                    btn.classList.add('btn-secondary');
+                    btn.innerHTML = '<i class="fas fa-check me-2"></i>On Waitlist';
+                    showToast(`You're on the waitlist for ${className}! We'll email you if a spot opens up.`);
+                });
             });
         });
     </script>
