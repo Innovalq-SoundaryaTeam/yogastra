@@ -68,10 +68,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const confirmBookBtn = document.getElementById('confirmBookBtn');
     
     if (bookButtons.length > 0 && confirmBookBtn) {
+        const modalClassName = document.getElementById('modalClassName');
+        const modalInstructorName = document.getElementById('modalInstructorName');
+
         bookButtons.forEach(btn => {
             btn.addEventListener('click', function() {
-                // In a real app, populate modal with class details here
-                // e.g., using dataset attributes: this.dataset.classId
+                const card = this.closest('.class-card-item');
+                const className = this.dataset.className || 'this class';
+                const instructorName = (card && card.dataset.instructor) || 'your instructor';
+
+                if (modalClassName) modalClassName.textContent = className;
+                if (modalInstructorName) modalInstructorName.textContent = instructorName;
             });
         });
 

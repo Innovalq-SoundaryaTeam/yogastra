@@ -36,7 +36,7 @@
                         </div>
                         
                         <!-- Register Form -->
-                        <form action="dashboard-home.html" method="GET" class="needs-validation" novalidate onsubmit="if(!this.checkValidity()) { event.preventDefault(); } this.classList.add('was-validated');">
+                        <form id="registerForm" class="needs-validation" novalidate>
                             <div class="row g-3">
                                 <div class="col-12">
                                     <label for="fullName" class="form-label">Full Name</label>
@@ -101,8 +101,8 @@
 
     <script src="../assets/js/main.js"></script>
     <script>
-        // Pre-select plan if passed in URL
         document.addEventListener('DOMContentLoaded', () => {
+            // Pre-select plan if passed in URL (e.g. linked from the pricing page)
             const urlParams = new URLSearchParams(window.location.search);
             const planParam = urlParams.get('plan');
             if (planParam) {
@@ -110,6 +110,23 @@
                 if (planSelect) {
                     planSelect.value = planParam;
                 }
+            }
+
+            // Handle submit via JS instead of a native GET form action, so
+            // account details (including the password field) never end up
+            // as plaintext in the URL bar or browser history.
+            const form = document.getElementById('registerForm');
+            if (form) {
+                form.addEventListener('submit', (e) => {
+                    e.preventDefault();
+
+                    if (!form.checkValidity()) {
+                        form.classList.add('was-validated');
+                        return;
+                    }
+
+                    window.location.href = 'dashboard-home.html';
+                });
             }
         });
     </script>
