@@ -120,8 +120,8 @@
                                     <th class="py-3 px-4 text-end">Action</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
+                            <tbody id="bookingsTableBody">
+                                <tr data-class-name="Dynamic Vinyasa" data-date-time="Tomorrow, 07:00 AM - 08:15 AM">
                                     <td class="py-3 px-4">
                                         <div class="fw-bold">Tomorrow</div>
                                         <small class="text-muted">07:00 AM - 08:15 AM</small>
@@ -129,10 +129,10 @@
                                     <td class="py-3 px-4">Dynamic Vinyasa</td>
                                     <td class="py-3 px-4">Sarah Jenkins</td>
                                     <td class="py-3 px-4 text-end">
-                                        <button type="button" class="btn btn-sm btn-outline-danger">Cancel</button>
+                                        <button type="button" class="btn btn-sm btn-outline-danger btn-cancel-booking">Cancel</button>
                                     </td>
                                 </tr>
-                                <tr>
+                                <tr data-class-name="Yin Restore" data-date-time="Friday, Oct 2, 18:00 PM - 19:00 PM">
                                     <td class="py-3 px-4">
                                         <div class="fw-bold">Friday, Oct 2</div>
                                         <small class="text-muted">18:00 PM - 19:00 PM</small>
@@ -140,11 +140,14 @@
                                     <td class="py-3 px-4">Yin Restore</td>
                                     <td class="py-3 px-4">Kiran Rani</td>
                                     <td class="py-3 px-4 text-end">
-                                        <button type="button" class="btn btn-sm btn-outline-danger">Cancel</button>
+                                        <button type="button" class="btn btn-sm btn-outline-danger btn-cancel-booking">Cancel</button>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
+                    </div>
+                    <div class="text-center text-muted py-4 d-none" id="noBookingsMsg">
+                        You have no upcoming bookings. <a href="dashboard-book.html">Book a class</a>.
                     </div>
                 </div>
             </div>
@@ -158,5 +161,32 @@
     <!-- Custom JS -->
     <script src="../assets/js/main.js"></script>
     <script src="../assets/js/dashboard.js"></script>
+    <script>
+        // Cancel booking (Upcoming Bookings table)
+        document.addEventListener('DOMContentLoaded', () => {
+            const tbody = document.getElementById('bookingsTableBody');
+            const emptyMsg = document.getElementById('noBookingsMsg');
+            if (!tbody) return;
+
+            tbody.addEventListener('click', (e) => {
+                const btn = e.target.closest('.btn-cancel-booking');
+                if (!btn) return;
+
+                const row = btn.closest('tr');
+                const className = row.dataset.className || 'this class';
+                const dateTime = row.dataset.dateTime || '';
+                const confirmed = window.confirm(
+                    `Cancel your booking for ${className}${dateTime ? ' on ' + dateTime : ''}?`
+                );
+
+                if (confirmed) {
+                    row.remove();
+                    if (tbody.children.length === 0 && emptyMsg) {
+                        emptyMsg.classList.remove('d-none');
+                    }
+                }
+            });
+        });
+    </script>
 </body>
 </html>
