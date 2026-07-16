@@ -93,9 +93,10 @@
                             </div>
                             
                             <div class="d-flex gap-3">
-                                <button type="button" class="btn btn-primary">Upgrade Plan</button>
-                                <button type="button" class="btn btn-outline-danger">Cancel Membership</button>
+                                <a href="pricing.html" class="btn btn-primary">Upgrade Plan</a>
+                                <button type="button" class="btn btn-outline-danger" id="cancelMembershipBtn">Cancel Membership</button>
                             </div>
+                            <p class="text-danger small mt-3 mb-0 d-none" id="cancelMembershipNotice"></p>
                         </div>
                     </div>
                     
@@ -112,7 +113,7 @@
                                 </div>
                             </div>
                             
-                            <button type="button" class="btn btn-outline-primary w-100 mb-4">Update Payment Method</button>
+                            <button type="button" class="btn btn-outline-primary w-100 mb-4" id="updatePaymentBtn">Update Payment Method</button>
                             
                             <div class="alert alert-info small mb-0 border-0 bg-primary-subtle text-primary-emphasis">
                                 <i class="fas fa-info-circle me-2"></i> Your card will automatically be charged on Oct 12, 2026.
@@ -138,19 +139,19 @@
                                     <td class="py-3 px-4">Sep 12, 2026</td>
                                     <td class="py-3 px-4">Standard Membership (Monthly)</td>
                                     <td class="py-3 px-4">$89.00</td>
-                                    <td class="py-3 px-4 text-end"><a href="../documentation/credits.txt" class="text-primary" aria-label="Download September invoice"><i class="fas fa-download"></i></a></td>
+                                    <td class="py-3 px-4 text-end"><a href="#" class="text-primary btn-download-receipt" data-date="Sep 12, 2026" data-desc="Standard Membership (Monthly)" data-amount="$89.00" aria-label="Download September invoice"><i class="fas fa-download"></i></a></td>
                                 </tr>
                                 <tr>
                                     <td class="py-3 px-4">Aug 12, 2026</td>
                                     <td class="py-3 px-4">Standard Membership (Monthly)</td>
                                     <td class="py-3 px-4">$89.00</td>
-                                    <td class="py-3 px-4 text-end"><a href="../documentation/credits.txt" class="text-primary" aria-label="Download August invoice"><i class="fas fa-download"></i></a></td>
+                                    <td class="py-3 px-4 text-end"><a href="#" class="text-primary btn-download-receipt" data-date="Aug 12, 2026" data-desc="Standard Membership (Monthly)" data-amount="$89.00" aria-label="Download August invoice"><i class="fas fa-download"></i></a></td>
                                 </tr>
                                 <tr>
                                     <td class="py-3 px-4">Jul 12, 2026</td>
                                     <td class="py-3 px-4">Standard Membership (Monthly)</td>
                                     <td class="py-3 px-4">$89.00</td>
-                                    <td class="py-3 px-4 text-end"><a href="../documentation/credits.txt" class="text-primary" aria-label="Download July invoice"><i class="fas fa-download"></i></a></td>
+                                    <td class="py-3 px-4 text-end"><a href="#" class="text-primary btn-download-receipt" data-date="Jul 12, 2026" data-desc="Standard Membership (Monthly)" data-amount="$89.00" aria-label="Download July invoice"><i class="fas fa-download"></i></a></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -160,8 +161,100 @@
         </main>
     </div>
 
+    <!-- Membership Toast -->
+    <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1080;">
+        <div id="membershipToast" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body" id="membershipToastBody"><i class="fas fa-check-circle me-2"></i>Done</div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../assets/js/main.js"></script>
     <script src="../assets/js/dashboard.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const toastEl = document.getElementById('membershipToast');
+            const toastBody = document.getElementById('membershipToastBody');
+            let hideTimer = null;
+
+            function showToast(message) {
+                if (!toastEl) return;
+                toastBody.innerHTML = `<i class="fas fa-check-circle me-2"></i>${message}`;
+                clearTimeout(hideTimer);
+                toastEl.classList.add('show');
+                hideTimer = setTimeout(() => toastEl.classList.remove('show'), 5000);
+            }
+
+            const closeBtn = toastEl ? toastEl.querySelector('.btn-close') : null;
+            if (closeBtn) {
+                closeBtn.addEventListener('click', () => {
+                    clearTimeout(hideTimer);
+                    toastEl.classList.remove('show');
+                });
+            }
+
+            // Cancel Membership (soft-cancel: confirm, then reflect status)
+            const cancelBtn = document.getElementById('cancelMembershipBtn');
+            const cancelNotice = document.getElementById('cancelMembershipNotice');
+            if (cancelBtn) {
+                cancelBtn.addEventListener('click', () => {
+                    const confirmed = window.confirm(
+                        'Cancel your Standard membership? You\'ll keep access until your current billing period ends on October 12, 2026, and won\'t be charged again after that.'
+                    );
+                    if (!confirmed) return;
+
+                    cancelBtn.disabled = true;
+                    cancelBtn.textContent = 'Cancellation Scheduled';
+
+                    const activeBadge = document.querySelector('.badge.bg-success');
+                    if (activeBadge) {
+                        activeBadge.textContent = 'Cancels Oct 12, 2026';
+                        activeBadge.classList.remove('bg-success');
+                        activeBadge.classList.add('bg-warning', 'text-dark');
+                    }
+
+                    cancelNotice.textContent = 'Your membership will remain active until October 12, 2026, then it will not renew.';
+                    cancelNotice.classList.remove('d-none');
+
+                    showToast('Your membership is scheduled to cancel at the end of the billing period.');
+                });
+            }
+
+            // Update Payment Method (no real payment backend in this demo)
+            const paymentBtn = document.getElementById('updatePaymentBtn');
+            if (paymentBtn) {
+                paymentBtn.addEventListener('click', () => {
+                    showToast('Payment method updates aren\'t available in this demo, but this is where a secure card form would open.');
+                });
+            }
+
+            // Download Receipt (generates a real per-row text receipt)
+            document.querySelectorAll('.btn-download-receipt').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const { date, desc, amount } = link.dataset;
+                    const content =
+                        `Yogastra - Payment Receipt\n\n` +
+                        `Date: ${date}\n` +
+                        `Description: ${desc}\n` +
+                        `Amount: ${amount}\n\n` +
+                        `Thank you for being a Yogastra member.`;
+
+                    const blob = new Blob([content], { type: 'text/plain' });
+                    const url = URL.createObjectURL(blob);
+                    const tempLink = document.createElement('a');
+                    tempLink.href = url;
+                    tempLink.download = `Yogastra-Receipt-${date.replace(/[\s,]+/g, '-')}.txt`;
+                    document.body.appendChild(tempLink);
+                    tempLink.click();
+                    tempLink.remove();
+                    URL.revokeObjectURL(url);
+                });
+            });
+        });
+    </script>
 </body>
 </html>
