@@ -46,6 +46,25 @@ body.dark-mode .admin-table td {
   color: var(--color-text);
 }
 
+/* Bootstrap modals (e.g. the Add/Edit Record modal used across Members,
+   Trainers, Classes, and every other admin list page) always render on a
+   plain white surface -- they never switch to the dark card background.
+   Without this override, the rules above make headings/labels near-white,
+   which is unreadable against that white modal. Force modal text back to
+   normal dark colors regardless of dark mode. */
+body.dark-mode .modal-content,
+body.dark-mode .modal-title,
+body.dark-mode .modal-body,
+body.dark-mode .modal-body h1,
+body.dark-mode .modal-body h2,
+body.dark-mode .modal-body h3,
+body.dark-mode .modal-body h4,
+body.dark-mode .modal-body h5,
+body.dark-mode .modal-body h6,
+body.dark-mode .modal-body .form-label {
+  color: #212529;
+}
+
 /* Page Loader */
 .page-loader {
   position: fixed;
