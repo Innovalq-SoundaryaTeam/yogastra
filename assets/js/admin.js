@@ -183,6 +183,58 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
+        // Is this a pure date column (not a "Date & Time" column, which
+        // needs its full string kept intact)?
+        function isDateHeader(header) {
+            return /date/i.test(header) && !/time/i.test(header);
+        }
+        function isPlanHeader(header) {
+            return /plan/i.test(header);
+        }
+
+        // Reads every existing row's cell at column `index` to find the
+        // distinct values already in use (for building a Plan dropdown) and
+        // any badge class each value is displayed with (e.g. Premium ->
+        // "bg-primary"), so edits/adds stay visually consistent with rows
+        // that were already there.
+        function getColumnValues(index) {
+            const values = [];
+            const badgeClasses = {};
+            Array.from(tbody.children).forEach(tr => {
+                const cell = tr.children[index];
+                if (!cell) return;
+                const text = cell.textContent.trim();
+                if (!text || values.includes(text)) return;
+                values.push(text);
+                const badge = cell.querySelector('.badge');
+                if (badge) {
+                    badgeClasses[text] = Array.from(badge.classList).filter(c => c !== 'badge').join(' ');
+                }
+            });
+            return { values, badgeClasses };
+        }
+
+        // Converts a human-readable date ("Jan 15, 2026") into the
+        // yyyy-mm-dd format <input type="date"> requires.
+        function toISODate(str) {
+            if (!str) return '';
+            const d = new Date(str);
+            if (isNaN(d.getTime())) return '';
+            const yyyy = d.getFullYear();
+            const mm = String(d.getMonth() + 1).padStart(2, '0');
+            const dd = String(d.getDate()).padStart(2, '0');
+            return `${yyyy}-${mm}-${dd}`;
+        }
+
+        // Converts a date-input's yyyy-mm-dd value back to the "Jan 15,
+        // 2026" style already used across the admin tables.
+        function formatDisplayDate(iso) {
+            if (!iso) return '';
+            const [y, m, d] = iso.split('-').map(Number);
+            if (!y || !m || !d) return iso;
+            return new Date(y, m - 1, d).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        }
+
         function openModal(mode, row) {
             const modalEl = document.getElementById('genericRecordModal');
             const modalTitle = document.getElementById('genericRecordModalTitle');
@@ -195,6 +247,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (row && row.children[i]) {
                     value = row.children[i].textContent.trim();
                 }
+
+                if (isDateHeader(header)) {
+                    return `<div class="mb-3"><label class="form-label">${header}</label><input type="date" class="form-control" data-field-index="${i}" value="${toISODate(value)}"></div>`;
+                }
+
+                if (isPlanHeader(header)) {
+                    const { values: planOptions } = getColumnValues(i);
+                    const needsPlaceholder = !value || !planOptions.includes(value);
+                    const optionsHtml = (needsPlaceholder ? `<option value="" disabled ${!value ? 'selected' : ''}>Select ${header}</option>` : '') +
+                        planOptions.map(opt => `<option value="${opt.replace(/"/g, '&quot;')}" ${opt === value ? 'selected' : ''}>${opt}</option>`).join('');
+                    return `<div class="mb-3"><label class="form-label">${header}</label><select class="form-select" data-field-index="${i}">${optionsHtml}</select></div>`;
+                }
+
                 return `<div class="mb-3"><label class="form-label">${header}</label><input type="text" class="form-control" data-field-index="${i}" value="${value.replace(/"/g, '&quot;')}"></div>`;
             }).join('');
 
@@ -231,6 +296,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         const activeWords = ['active', 'published', 'paid', 'completed', 'sent', 'read', 'confirmed'];
                         const cls = activeWords.some(w => lower.includes(w)) ? 'status-active' : 'status-pending';
                         cell.innerHTML = `<span class="status-badge ${cls}">${val}</span>`;
+                    } else if (isDateHeader(header)) {
+                        cell.textContent = formatDisplayDate(val);
+                    } else if (isPlanHeader(header)) {
+                        const { badgeClasses } = getColumnValues(i);
+                        const cls = badgeClasses[val];
+                        cell.innerHTML = cls ? `<span class="badge ${cls}">${val}</span>` : val;
                     } else {
                         cell.textContent = val;
                     }
