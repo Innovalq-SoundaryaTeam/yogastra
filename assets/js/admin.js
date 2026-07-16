@@ -288,12 +288,17 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 7. Download Report: generates a real text-file summary from whatever
-    // stat cards are on the page (currently just the main Dashboard).
+    // 7. Download/Export Report: generates a real text-file summary from
+    // whatever stat cards are on the page. Matches both "Download Report"
+    // (Dashboard) and "Export Report" (Reports) by the download icon, plus
+    // any table on the page, so it works generically on either page.
     document.querySelectorAll('.btn-primary').forEach(btn => {
-        if (!/Download Report/i.test(btn.textContent)) return;
+        if (!btn.querySelector('i.fa-download')) return;
+        if (!/report/i.test(btn.textContent)) return;
 
         btn.addEventListener('click', () => {
+            const pageTitle = document.querySelector('main h2')?.textContent.trim() || 'Report';
+
             const stats = Array.from(document.querySelectorAll('.stat-card')).map(card => {
                 const label = card.querySelector('p')?.textContent.trim() || '';
                 const value = card.querySelector('h3')?.textContent.trim() || '';
@@ -301,14 +306,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 return `${label}: ${value}${note ? ' (' + note + ')' : ''}`;
             });
 
+            const tableRows = Array.from(document.querySelectorAll('.admin-table')).flatMap(t => {
+                const headers = Array.from(t.querySelectorAll('thead th')).map(th => th.textContent.trim());
+                const rows = Array.from(t.querySelectorAll('tbody tr')).map(tr =>
+                    Array.from(tr.children).map(td => td.textContent.trim()).join(' | ')
+                );
+                return rows.length ? [headers.join(' | '), ...rows] : [];
+            });
+
             const today = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-            const content = `Yogastra Admin - Dashboard Report\nGenerated: ${today}\n\n${stats.join('\n')}\n`;
+            const sections = [`Yogastra Admin - ${pageTitle}`, `Generated: ${today}`, ''];
+            if (stats.length) sections.push(stats.join('\n'), '');
+            if (tableRows.length) sections.push(tableRows.join('\n'), '');
+            const content = sections.join('\n');
 
             const blob = new Blob([content], { type: 'text/plain' });
             const url = URL.createObjectURL(blob);
             const link = document.createElement('a');
             link.href = url;
-            link.download = `Yogastra-Dashboard-Report-${new Date().toISOString().slice(0, 10)}.txt`;
+            link.download = `Yogastra-${pageTitle.replace(/\s+/g, '-')}-${new Date().toISOString().slice(0, 10)}.txt`;
             document.body.appendChild(link);
             link.click();
             link.remove();
