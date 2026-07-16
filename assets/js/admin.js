@@ -254,6 +254,67 @@ document.addEventListener('DOMContentLoaded', () => {
             openModal('edit', editBtn.closest('tr'));
         });
     });
+
+    // 6. Notification bell: turn the static bell icon into a working
+    // Bootstrap dropdown showing recent alerts, and clear its unread dot
+    // once opened. Present in the header on every admin page.
+    document.querySelectorAll('.action-btn').forEach(btn => {
+        if (!btn.querySelector('i.fa-bell')) return;
+
+        const badge = btn.querySelector('.badge-indicator');
+        const wrapper = document.createElement('div');
+        wrapper.className = 'dropdown';
+        btn.parentNode.insertBefore(wrapper, btn);
+        wrapper.appendChild(btn);
+
+        btn.setAttribute('data-bs-toggle', 'dropdown');
+        btn.setAttribute('aria-expanded', 'false');
+
+        const menu = document.createElement('ul');
+        menu.className = 'dropdown-menu dropdown-menu-end shadow border-0 mt-2 p-2';
+        menu.style.width = '320px';
+        menu.innerHTML = `
+            <li class="px-2 py-1 fw-bold border-bottom mb-2">Notifications</li>
+            <li><a class="dropdown-item small py-2 white-space-normal" href="notifications.html">New Power Yoga class added to the schedule</a></li>
+            <li><a class="dropdown-item small py-2 white-space-normal" href="notifications.html">Your membership renews in 3 days</a></li>
+            <li><a class="dropdown-item small py-2 white-space-normal" href="notifications.html">Payment failed for invoice #INV-3006</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item small text-center text-primary fw-bold" href="notifications.html">View all notifications</a></li>
+        `;
+        wrapper.appendChild(menu);
+
+        btn.addEventListener('click', () => {
+            if (badge) badge.style.display = 'none';
+        });
+    });
+
+    // 7. Download Report: generates a real text-file summary from whatever
+    // stat cards are on the page (currently just the main Dashboard).
+    document.querySelectorAll('.btn-primary').forEach(btn => {
+        if (!/Download Report/i.test(btn.textContent)) return;
+
+        btn.addEventListener('click', () => {
+            const stats = Array.from(document.querySelectorAll('.stat-card')).map(card => {
+                const label = card.querySelector('p')?.textContent.trim() || '';
+                const value = card.querySelector('h3')?.textContent.trim() || '';
+                const note = card.querySelector('small')?.textContent.trim() || '';
+                return `${label}: ${value}${note ? ' (' + note + ')' : ''}`;
+            });
+
+            const today = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+            const content = `Yogastra Admin - Dashboard Report\nGenerated: ${today}\n\n${stats.join('\n')}\n`;
+
+            const blob = new Blob([content], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `Yogastra-Dashboard-Report-${new Date().toISOString().slice(0, 10)}.txt`;
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+            URL.revokeObjectURL(url);
+        });
+    });
 });
 
 // Delete confirmation — removes the row the clicked button belongs to.
