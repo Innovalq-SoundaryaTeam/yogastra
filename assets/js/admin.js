@@ -191,27 +191,37 @@ document.addEventListener('DOMContentLoaded', () => {
         function isPlanHeader(header) {
             return /plan/i.test(header);
         }
+        function isStatusHeader(header) {
+            return /status/i.test(header);
+        }
+        // Any column that should become a dropdown of its own existing
+        // values (Plan, Status) instead of a free-text field.
+        function isSelectHeader(header) {
+            return isPlanHeader(header) || isStatusHeader(header);
+        }
 
         // Reads every existing row's cell at column `index` to find the
-        // distinct values already in use (for building a Plan dropdown) and
-        // any badge class each value is displayed with (e.g. Premium ->
-        // "bg-primary"), so edits/adds stay visually consistent with rows
-        // that were already there.
+        // distinct values already in use (for building Plan/Status
+        // dropdowns) and whatever badge markup each value is displayed with
+        // (e.g. Premium -> badge/bg-primary, Active -> status-badge/status-active),
+        // so edits/adds stay visually consistent with rows that were already there.
         function getColumnValues(index) {
             const values = [];
-            const badgeClasses = {};
+            const badgeInfo = {};
             Array.from(tbody.children).forEach(tr => {
                 const cell = tr.children[index];
                 if (!cell) return;
                 const text = cell.textContent.trim();
                 if (!text || values.includes(text)) return;
                 values.push(text);
-                const badge = cell.querySelector('.badge');
+                const badge = cell.querySelector('.status-badge, .badge');
                 if (badge) {
-                    badgeClasses[text] = Array.from(badge.classList).filter(c => c !== 'badge').join(' ');
+                    const baseClass = badge.classList.contains('status-badge') ? 'status-badge' : 'badge';
+                    const extraClass = Array.from(badge.classList).filter(c => c !== baseClass).join(' ');
+                    badgeInfo[text] = { baseClass, extraClass };
                 }
             });
-            return { values, badgeClasses };
+            return { values, badgeInfo };
         }
 
         // Converts a human-readable date ("Jan 15, 2026") into the
@@ -252,11 +262,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     return `<div class="mb-3"><label class="form-label">${header}</label><input type="date" class="form-control" data-field-index="${i}" value="${toISODate(value)}"></div>`;
                 }
 
-                if (isPlanHeader(header)) {
-                    const { values: planOptions } = getColumnValues(i);
-                    const needsPlaceholder = !value || !planOptions.includes(value);
+                if (isSelectHeader(header)) {
+                    const { values: options } = getColumnValues(i);
+                    const needsPlaceholder = !value || !options.includes(value);
                     const optionsHtml = (needsPlaceholder ? `<option value="" disabled ${!value ? 'selected' : ''}>Select ${header}</option>` : '') +
-                        planOptions.map(opt => `<option value="${opt.replace(/"/g, '&quot;')}" ${opt === value ? 'selected' : ''}>${opt}</option>`).join('');
+                        options.map(opt => `<option value="${opt.replace(/"/g, '&quot;')}" ${opt === value ? 'selected' : ''}>${opt}</option>`).join('');
                     return `<div class="mb-3"><label class="form-label">${header}</label><select class="form-select" data-field-index="${i}">${optionsHtml}</select></div>`;
                 }
 
@@ -291,17 +301,24 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (!cell) return;
                     const val = values[i] || '';
 
-                    if (/status/i.test(header)) {
-                        const lower = val.toLowerCase();
-                        const activeWords = ['active', 'published', 'paid', 'completed', 'sent', 'read', 'confirmed'];
-                        const cls = activeWords.some(w => lower.includes(w)) ? 'status-active' : 'status-pending';
-                        cell.innerHTML = `<span class="status-badge ${cls}">${val}</span>`;
+                    if (isStatusHeader(header)) {
+                        const { badgeInfo } = getColumnValues(i);
+                        const info = badgeInfo[val];
+                        if (info) {
+                            cell.innerHTML = `<span class="${info.baseClass} ${info.extraClass}">${val}</span>`;
+                        } else {
+                            // Fallback for a brand-new status value never seen in this column before.
+                            const lower = val.toLowerCase();
+                            const activeWords = ['active', 'published', 'paid', 'completed', 'sent', 'read', 'confirmed'];
+                            const cls = activeWords.some(w => lower.includes(w)) ? 'status-active' : 'status-pending';
+                            cell.innerHTML = `<span class="status-badge ${cls}">${val}</span>`;
+                        }
                     } else if (isDateHeader(header)) {
                         cell.textContent = formatDisplayDate(val);
                     } else if (isPlanHeader(header)) {
-                        const { badgeClasses } = getColumnValues(i);
-                        const cls = badgeClasses[val];
-                        cell.innerHTML = cls ? `<span class="badge ${cls}">${val}</span>` : val;
+                        const { badgeInfo } = getColumnValues(i);
+                        const info = badgeInfo[val];
+                        cell.innerHTML = info ? `<span class="${info.baseClass} ${info.extraClass}">${val}</span>` : val;
                     } else {
                         cell.textContent = val;
                     }
