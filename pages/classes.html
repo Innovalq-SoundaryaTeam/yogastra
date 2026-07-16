@@ -334,6 +334,20 @@
                 filterDay.value = 'all';
                 render();
             });
+
+            // Preset the Style filter from a ?style= query param, e.g. links
+            // from the homepage's practice cards (Hatha Yoga, Vinyasa Flow,
+            // Yin Yoga, Meditation) so "View Classes" actually jumps to that
+            // style instead of always landing on the same unfiltered grid.
+            const urlParams = new URLSearchParams(window.location.search);
+            const styleParam = urlParams.get('style');
+            if (styleParam) {
+                const hasOption = Array.from(filterStyle.options).some(opt => opt.value === styleParam);
+                if (hasOption) {
+                    filterStyle.value = styleParam;
+                    render();
+                }
+            }
         });
     </script>
 </body>
