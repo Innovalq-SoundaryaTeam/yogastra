@@ -402,6 +402,56 @@ document.addEventListener('DOMContentLoaded', () => {
             URL.revokeObjectURL(url);
         });
     });
+
+    // 8. Save Changes (Settings, Profile): persists the page's fields to
+    // localStorage and restores them on the next visit, so the button
+    // actually saves something in this backend-less demo. Fields are keyed
+    // by their <label> text since none of them have id/name attributes.
+    document.querySelectorAll('.btn-primary').forEach(btn => {
+        if (!btn.querySelector('i.fa-save')) return;
+        if (!/save/i.test(btn.textContent)) return;
+
+        const storageKey = `yogastraAdminSettings:${window.location.pathname}`;
+
+        function getFieldEntries() {
+            return Array.from(document.querySelectorAll('main .form-label'))
+                .map(label => ({
+                    key: label.textContent.trim(),
+                    input: label.parentElement.querySelector('input, select, textarea')
+                }))
+                .filter(entry => entry.input && entry.input.type !== 'password');
+        }
+        const switches = Array.from(document.querySelectorAll('main .form-check-input[type="checkbox"][id]'));
+
+        // Restore anything saved on a previous visit.
+        try {
+            const saved = JSON.parse(localStorage.getItem(storageKey) || '{}');
+            getFieldEntries().forEach(({ key, input }) => {
+                if (saved.fields && key in saved.fields) input.value = saved.fields[key];
+            });
+            switches.forEach(sw => {
+                if (saved.switches && sw.id in saved.switches) sw.checked = saved.switches[sw.id];
+            });
+        } catch (e) { /* ignore malformed/missing storage */ }
+
+        btn.addEventListener('click', () => {
+            const fields = {};
+            getFieldEntries().forEach(({ key, input }) => { fields[key] = input.value; });
+
+            const switchValues = {};
+            switches.forEach(sw => { switchValues[sw.id] = sw.checked; });
+
+            localStorage.setItem(storageKey, JSON.stringify({ fields, switches: switchValues }));
+
+            const originalHTML = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-check me-2"></i> Saved!';
+            setTimeout(() => {
+                btn.innerHTML = originalHTML;
+                btn.disabled = false;
+            }, 1800);
+        });
+    });
 });
 
 // Delete confirmation — removes the row the clicked button belongs to.
