@@ -209,6 +209,21 @@ body.dark-mode .sidebar-brand {
   color: var(--color-text);
 }
 
+/* Search/filter inputs inside admin list cards (e.g. "Search members...",
+   "All Plans", "All Status" on Members, Trainers, Yoga Classes, etc.) have
+   no explicit styling, so in dark mode the browser's own forced-dark
+   rendering of unstyled form controls takes over with washed-out,
+   low-contrast placeholder text. Style them explicitly instead. */
+body.dark-mode .admin-card .form-control,
+body.dark-mode .admin-card .form-select {
+  background-color: var(--color-bg);
+  border-color: rgba(255, 255, 255, 0.15);
+  color: var(--color-text);
+}
+body.dark-mode .admin-card .form-control::placeholder {
+  color: var(--color-text-muted);
+}
+
 .header-actions {
   display: flex;
   align-items: center;
