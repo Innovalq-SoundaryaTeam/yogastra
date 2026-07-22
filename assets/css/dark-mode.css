@@ -176,6 +176,14 @@ YOGASTRA - DARK MODE
   box-shadow: none !important;
 }
 
+/* Every text input's placeholder (blog search, contact form, register
+   form, etc.) was left unstyled in dark mode, so it fell back to the
+   browser's low-contrast default gray against the dark input background. */
+[data-theme="dark"] .form-control::placeholder {
+  color: var(--color-text-muted) !important;
+  opacity: 1;
+}
+
 [data-theme="dark"] .form-select {
   background-image: linear-gradient(45deg, transparent 50%, rgba(255,255,255,0.35) 50%),
                     linear-gradient(135deg, rgba(255,255,255,0.35) 50%, transparent 50%),
