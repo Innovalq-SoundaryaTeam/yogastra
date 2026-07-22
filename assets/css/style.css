@@ -128,6 +128,17 @@ COMPONENTS
   transform: scale(1.02);
 }
 
+/* Used on outline buttons sitting over a photo/hero overlay that need a
+   white resting background for contrast. Bootstrap's own ".bg-white"
+   utility is "!important", which permanently locks the background to white
+   even on hover -- combined with the hover rule above still turning the
+   text white, that made the button's label disappear (white text on a
+   white background that could never change). This class gives the same
+   white resting background without !important, so hover works normally. */
+.hero-btn-outline {
+  background-color: #fff;
+}
+
 /* Navbar */
 .navbar {
   background-color: var(--color-sidebar);
