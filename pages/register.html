@@ -12,23 +12,22 @@
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/dark-mode.css">
     <link rel="stylesheet" href="../assets/css/rtl.css">
+    <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
 </head>
 <body class="d-flex flex-column min-vh-100 bg-section">
 
-    <nav aria-label="Main navigation" class="navbar navbar-expand-lg bg-transparent shadow-none pt-4">
-        <div class="container">
-            <a class="navbar-brand text-dark" href="index.html"><i class="fas fa-leaf me-2"></i>Yogastra</a>
-            <div class="ms-auto d-flex align-items-center gap-3">
-                <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle Dark Mode"><i class="fas fa-moon text-dark"></i></button>
-                <button type="button" class="rtl-toggle" id="rtl-toggle" aria-label="Toggle RTL Mode"><i class="fas fa-language text-dark"></i></button>
-            </div>
-        </div>
-    </nav>
-
+    <!-- Authentication pages intentionally have no site nav/header or footer;
+         just a clickable brand mark above the form card. -->
     <main class="flex-grow-1 d-flex align-items-center py-5">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-8 col-lg-6">
+                    <div class="text-center mb-4">
+                        <a href="index.html" class="navbar-brand text-primary fs-3 fw-bold d-inline-flex align-items-center">
+                            <i class="fas fa-leaf me-2"></i>Yogastra
+                        </a>
+                    </div>
+
                     <div class="bg-white p-4 p-md-5 rounded-4 shadow-lg border-0">
                         <div class="text-center mb-4">
                             <h2 class="fw-bold">Join Yogastra</h2>
@@ -84,6 +83,22 @@
                             <button type="submit" class="btn btn-primary w-100 py-2 mb-3">Create Account</button>
                         </form>
 
+                        <!-- Social Sign Up -->
+                        <div class="d-flex align-items-center gap-3 my-4">
+                            <hr class="flex-grow-1 my-0">
+                            <span class="text-muted small text-nowrap">or sign up with</span>
+                            <hr class="flex-grow-1 my-0">
+                        </div>
+                        <div class="d-flex gap-3 mb-4">
+                            <button type="button" class="btn btn-outline-secondary w-100 d-flex align-items-center justify-content-center gap-2" id="googleSignupBtn">
+                                <i class="fab fa-google"></i> Google
+                            </button>
+                            <button type="button" class="btn btn-outline-secondary w-100 d-flex align-items-center justify-content-center gap-2" id="appleSignupBtn">
+                                <i class="fab fa-apple"></i> Apple
+                            </button>
+                        </div>
+                        <p class="text-muted small text-center mb-0 d-none" id="socialSignupNotice">Social sign-up isn't wired to a real provider in this demo.</p>
+
                         <div class="text-center mt-3">
                             <p class="small text-muted mb-0">Already have an account? <a href="login.html" class="fw-bold text-primary">Log in here</a></p>
                         </div>
@@ -92,12 +107,6 @@
             </div>
         </div>
     </main>
-
-    <footer class="py-4 text-center">
-        <div class="container">
-            <p class="mb-0 text-muted small">&copy; 2026 Yogastra. All rights reserved.</p>
-        </div>
-    </footer>
 
     <script src="../assets/js/main.js"></script>
     <script>
@@ -128,6 +137,17 @@
                     window.location.href = 'dashboard-home.html';
                 });
             }
+
+            // Social sign-up (demo only -- no real OAuth provider wired up)
+            const socialNotice = document.getElementById('socialSignupNotice');
+            ['googleSignupBtn', 'appleSignupBtn'].forEach(id => {
+                const btn = document.getElementById(id);
+                if (btn) {
+                    btn.addEventListener('click', () => {
+                        if (socialNotice) socialNotice.classList.remove('d-none');
+                    });
+                }
+            });
         });
     </script>
 </body>

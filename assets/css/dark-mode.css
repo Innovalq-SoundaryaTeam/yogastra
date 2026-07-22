@@ -54,6 +54,21 @@ YOGASTRA - DARK MODE
   background-color: var(--color-primary);
 }
 
+[data-theme="dark"] .navbar .dropdown-menu {
+  background-color: var(--color-sidebar);
+  border-color: rgba(255,255,255,0.1);
+}
+
+[data-theme="dark"] .navbar .dropdown-item {
+  color: var(--color-text);
+}
+
+[data-theme="dark"] .navbar .dropdown-item:hover,
+[data-theme="dark"] .navbar .dropdown-item:focus {
+  background-color: rgba(255,255,255,0.06);
+  color: var(--color-primary);
+}
+
 [data-theme="dark"] .yoga-card {
   background-color: var(--color-sidebar);
   border-color: rgba(255,255,255,0.05);
@@ -168,8 +183,14 @@ YOGASTRA - DARK MODE
 
 [data-theme="dark"] .form-select option,
 [data-theme="dark"] select option {
-  background-color: var(--color-sidebar) !important;
-  color: var(--color-text) !important;
+  /* Mobile browsers render the native option popup with the OS/browser's
+     own chrome, ignoring background-color overrides here even though they
+     honor the text color. That mismatch (light text forced onto a white
+     system popup) makes the options unreadable. Force a light background
+     with dark text instead, so the popup is always legible regardless of
+     whether the browser lets the page restyle it. */
+  background-color: #ffffff !important;
+  color: #212529 !important;
 }
 
 [data-theme="dark"] .form-select:focus {
@@ -180,6 +201,19 @@ YOGASTRA - DARK MODE
 [data-theme="dark"] .btn-outline-primary {
   color: var(--color-primary) !important;
   border-color: var(--color-primary) !important;
+}
+
+/* Buttons' hover states normally swap to var(--color-primary), which in dark
+   mode is a lighter sage (#7CA87B) -- white button text on that light-ish
+   green reads as low-contrast. Use a darker green on hover instead so text
+   stays legible. This also has higher specificity than ".bg-white" (used on
+   the homepage hero's second button), so it fixes the hero button's hover
+   being silently overridden by the dark-mode ".bg-white" rule too. */
+[data-theme="dark"] .btn-primary:hover,
+[data-theme="dark"] .btn-outline-primary:hover {
+  background-color: #3F5640 !important;
+  border-color: #3F5640 !important;
+  color: #fff !important;
 }
 
 [data-theme="dark"] .text-white-50,

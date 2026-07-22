@@ -91,6 +91,26 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // 4b. Newsletter subscribe form (footer, every page)
+    const newsletterForm = document.getElementById('newsletterForm');
+    const newsletterEmail = document.getElementById('newsletterEmail');
+    const newsletterSuccess = document.getElementById('newsletterSuccess');
+    if (newsletterForm && !newsletterForm.dataset.wired) {
+        newsletterForm.dataset.wired = 'true';
+        newsletterForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            if (!newsletterEmail || !newsletterEmail.checkValidity()) {
+                if (newsletterEmail) newsletterEmail.reportValidity();
+                return;
+            }
+            if (newsletterSuccess) newsletterSuccess.classList.remove('d-none');
+            newsletterForm.reset();
+            setTimeout(() => {
+                if (newsletterSuccess) newsletterSuccess.classList.add('d-none');
+            }, 6000);
+        });
+    }
+
     // 4. Smooth Scrolling for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {

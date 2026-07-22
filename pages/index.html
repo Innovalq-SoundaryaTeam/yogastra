@@ -39,6 +39,7 @@
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/dark-mode.css">
     <link rel="stylesheet" href="../assets/css/rtl.css">
+    <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
 </head>
 <body>
 
@@ -53,7 +54,13 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mx-auto">
-                    <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="index.html" id="homeDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Home</a>
+                        <ul class="dropdown-menu" aria-labelledby="homeDropdown">
+                            <li><a class="dropdown-item" href="index.html">Classic</a></li>
+                            <li><a class="dropdown-item" href="home-2.html">Modern</a></li>
+                        </ul>
+                    </li>
                     <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="classes.html">Classes</a></li>
                     <li class="nav-item"><a class="nav-link" href="instructors.html">Instructors</a></li>
@@ -66,9 +73,9 @@
                         <i class="fas fa-moon"></i>
                     </button>
                     <button type="button" class="rtl-toggle" id="rtl-toggle" aria-label="Toggle RTL Mode">
-                        <i class="fas fa-language"></i>
+                        <i class="fas fa-right-left"></i>
                     </button>
-                    <a href="login.html" class="btn btn-outline-primary d-inline-flex mt-2 mt-lg-0">Member Login</a>
+                    <a href="login.html" class="btn btn-primary d-inline-flex mt-2 mt-lg-0">Member Login</a>
                 </div>
             </div>
         </div>
@@ -80,13 +87,13 @@
         <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=1920&q=80" alt="Woman doing yoga" class="hero-image">
         <div class="hero-overlay"></div>
         <div class="container position-relative z-3">
-            <div class="row">
-                <div class="col-lg-8">
-                    <div class="hero-content">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <div class="hero-content mx-auto">
                         <span class="text-uppercase text-primary fw-bold mb-2 d-block tracking-wider">Welcome to Yogastra</span>
                         <h1 class="hero-title">Find Your Balance, <br>Restore Your Peace</h1>
                         <p class="lead mb-4">Join our sanctuary of wellness. Experience transformative yoga and meditation classes guided by expert instructors in a calming environment.</p>
-                        <div class="d-flex gap-3 flex-wrap">
+                        <div class="d-flex gap-3 flex-wrap justify-content-center">
                             <a href="classes.html" class="btn btn-primary btn-lg">Explore Classes <i class="fas fa-arrow-right"></i></a>
                             <a href="about.html" class="btn btn-outline-primary btn-lg bg-white">Discover Our Studio</a>
                         </div>
@@ -164,7 +171,7 @@
                 <p class="mx-auto" style="max-width: 600px;">Find a time that works for you. We offer classes daily from early morning to late evening.</p>
             </div>
             
-            <div class="table-responsive rounded-3 shadow-sm bg-white overflow-hidden">
+            <div class="table-responsive rounded-3 shadow-sm bg-white">
                 <table class="table table-hover mb-0 text-center align-middle">
                     <thead class="bg-primary text-white">
                         <tr>

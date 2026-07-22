@@ -39,6 +39,7 @@
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/dark-mode.css">
     <link rel="stylesheet" href="../assets/css/rtl.css">
+    <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
 </head>
 <body>
 
@@ -53,7 +54,13 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mx-auto">
-                    <li class="nav-item"><a class="nav-link active" href="home-2.html">Home</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="home-2.html" id="homeDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Home</a>
+                        <ul class="dropdown-menu" aria-labelledby="homeDropdown">
+                            <li><a class="dropdown-item" href="index.html">Classic</a></li>
+                            <li><a class="dropdown-item" href="home-2.html">Modern</a></li>
+                        </ul>
+                    </li>
                     <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="classes.html">Classes</a></li>
                     <li class="nav-item"><a class="nav-link" href="instructors.html">Instructors</a></li>
@@ -66,9 +73,9 @@
                         <i class="fas fa-moon"></i>
                     </button>
                     <button type="button" class="rtl-toggle" id="rtl-toggle" aria-label="Toggle RTL Mode">
-                        <i class="fas fa-language"></i>
+                        <i class="fas fa-right-left"></i>
                     </button>
-                    <a href="login.html" class="btn btn-outline-primary d-inline-flex mt-2 mt-lg-0">Member Login</a>
+                    <a href="login.html" class="btn btn-primary d-inline-flex mt-2 mt-lg-0">Member Login</a>
                 </div>
             </div>
         </div>
@@ -261,17 +268,6 @@
                 <p class="fs-4 font-italic text-dark mb-4">"Yogastra has completely changed my approach to wellness. Booking a class takes seconds, the instructors remember your name, and I've never felt more consistent with my practice."</p>
                 <h6 class="fw-bold mb-0">Emily R.</h6>
                 <span class="text-muted small">Premium Member since 2024</span>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA Banner -->
-    <section class="py-5">
-        <div class="container">
-            <div class="text-center">
-                <h2 class="display-6 fw-bold mb-3">Ready to Begin?</h2>
-                <p class="text-muted mb-4 mx-auto" style="max-width: 500px;">Create your account and book your first class in minutes. Your first 7 days are on us.</p>
-                <a href="register.html" class="btn btn-primary btn-lg px-5">Join Yogastra Today</a>
             </div>
         </div>
     </section>

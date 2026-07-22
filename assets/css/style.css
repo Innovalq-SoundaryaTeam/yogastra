@@ -612,6 +612,25 @@ a:hover .icon-bounce {
 RESPONSIVE ADJUSTMENTS
 ==============================================
 */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  /* At ~1024px (tablet landscape / small laptop), the full nav -- logo +
+     7 links + RTL/theme icons + Member Login button -- barely fits inside
+     Bootstrap's narrower lg-breakpoint container, causing crowding/wrapping.
+     Tighten spacing so everything stays on one line and aligned. */
+  .nav-link {
+    padding: 0.5rem 0.55rem !important;
+    margin: 0 0.05rem;
+    font-size: 0.92rem;
+  }
+  .navbar .btn {
+    padding: 0.5rem 0.9rem;
+    font-size: 0.9rem;
+  }
+  .navbar .d-flex.align-items-center.gap-3 {
+    gap: 0.75rem !important;
+  }
+}
+
 @media (max-width: 991.98px) {
   .hero-title {
     font-size: 2.5rem;
@@ -619,24 +638,63 @@ RESPONSIVE ADJUSTMENTS
   .hero-overlay {
     background: rgba(250, 250, 248, 0.85);
   }
-  
+
+  /* The mobile menu should drop down as an overlay, not push page content
+     down the page when opened (was causing a layout shift on small screens). */
+  .navbar-collapse {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: var(--color-sidebar);
+    box-shadow: var(--shadow-md);
+    padding: 1rem 1.5rem 1.5rem;
+    z-index: 1029;
+    max-height: calc(100vh - 100%);
+    overflow-y: auto;
+  }
+
+  .navbar-nav.mx-auto {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  .navbar .d-flex.align-items-center.gap-3 {
+    margin-top: 1rem;
+    flex-wrap: wrap;
+  }
+
   .dashboard-sidebar {
     position: fixed;
     top: 0;
     left: -280px;
     height: 100vh;
   }
-  
+
   .dashboard-sidebar.show {
     left: 0;
   }
-  
+
   .dashboard-main {
     width: 100%;
   }
-  
+
   .dashboard-overlay.show {
     display: block;
+  }
+}
+
+@media (max-width: 575.98px) {
+  /* Further shrink the hero heading on phones so it, the subtext, and both
+     buttons all comfortably fit within the hero section's viewport height
+     instead of feeling cramped against overflow:hidden. */
+  .hero-title {
+    font-size: 1.9rem;
+  }
+  .hero-section {
+    height: auto;
+    min-height: 520px;
+    padding: 3rem 0;
   }
 }
 
