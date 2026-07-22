@@ -638,12 +638,21 @@ RESPONSIVE ADJUSTMENTS
 ==============================================
 */
 @media (min-width: 992px) and (max-width: 1199.98px) {
-  /* At ~1024px (tablet landscape / small laptop), the full nav -- logo +
-     7 links + RTL/theme icons + Member Login button -- barely fits inside
-     Bootstrap's narrower lg-breakpoint container, causing crowding/wrapping.
-     Tighten spacing so everything stays on one line and aligned. */
-  .nav-link {
-    padding: 0.5rem 0.55rem !important;
+  /* At ~1024px (tablet landscape / small laptop), Bootstrap's own container
+     is capped at a fixed 960px at this breakpoint, well short of the
+     1024px viewport, so the full nav -- logo + 7 links + dropdown + RTL/
+     theme icons + Member Login button -- gets squeezed and misaligned.
+     Let the navbar's container use the real available width instead. */
+  .navbar > .container {
+    max-width: 100%;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  /* Selector must match ".navbar .nav-link"'s specificity (two classes)
+     so this actually overrides the base rule within this breakpoint. */
+  .navbar .nav-link {
+    padding: 0.5rem 0.6rem !important;
     margin: 0 0.05rem;
     font-size: 0.92rem;
   }
@@ -652,7 +661,7 @@ RESPONSIVE ADJUSTMENTS
     font-size: 0.9rem;
   }
   .navbar .d-flex.align-items-center.gap-3 {
-    gap: 0.75rem !important;
+    gap: 0.65rem !important;
   }
 }
 
