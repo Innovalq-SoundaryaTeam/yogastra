@@ -154,7 +154,13 @@ COMPONENTS
   color: var(--color-primary);
 }
 
-.nav-link {
+/* Scoped to .navbar specifically -- other ".nav-link" elements exist
+   elsewhere on the site (e.g. the blog's category filter pills, which are
+   Bootstrap ".nav-pills" and also carry the ".nav-link" class). Without
+   this scoping, selecting a filter pill picked up the underline/active
+   styling meant only for the main site navigation and drew a stray
+   underline bar beneath the selected pill. */
+.navbar .nav-link {
   color: var(--color-text);
   font-weight: 600;
   position: relative;
@@ -163,7 +169,7 @@ COMPONENTS
 }
 
 /* Smooth underline slide-in */
-.nav-link::after {
+.navbar .nav-link::after {
   content: '';
   position: absolute;
   width: 0;
@@ -174,13 +180,13 @@ COMPONENTS
   transition: var(--transition-base);
 }
 
-.nav-link:hover::after,
-.nav-link.active::after {
+.navbar .nav-link:hover::after,
+.navbar .nav-link.active::after {
   width: 100%;
 }
 
-.nav-link:hover,
-.nav-link.active {
+.navbar .nav-link:hover,
+.navbar .nav-link.active {
   color: var(--color-primary);
 }
 
