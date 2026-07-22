@@ -445,6 +445,14 @@ a:hover .icon-bounce {
   padding-left: 4px; /* subtle slide on hover */
 }
 
+/* The newsletter email input sits on the footer's dark background; the
+   browser's default placeholder gray is too low-contrast there to read
+   comfortably. Use a clearly visible light gray instead. */
+.site-footer .form-control::placeholder {
+  color: rgba(255, 255, 255, 0.55);
+  opacity: 1;
+}
+
 .footer-social a {
   display: inline-flex;
   align-items: center;
