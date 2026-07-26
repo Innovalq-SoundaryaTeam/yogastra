@@ -52,9 +52,18 @@ body {
   background-color: var(--color-bg);
   color: var(--color-text);
   line-height: 1.6;
-  overflow-x: hidden;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
+/* overflow-x:hidden used to be set here too, but having it on BOTH <html>
+   and <body> broke every page's sticky navbar: the browser's sticky
+   containing-block calculation picked <body> as the "nearest scrolling
+   ancestor" (since it now clips overflow), yet <body> itself never
+   actually scrolls (the real scrolling element is <html>) -- so the navbar
+   never received a scroll offset to stick against and just scrolled away
+   with the rest of the page. <html>'s own overflow-x:hidden above already
+   fully prevents the page-level horizontal scrollbar/bleed on its own, so
+   removing the duplicate rule here fixes sticky positioning without
+   reopening the mobile horizontal-scroll bug it was added for. */
 
 /* Flex rows pairing a fixed-size image with a text block (the blog's
    "Popular Posts" list items, the blog-details author box, etc.) were
