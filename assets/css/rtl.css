@@ -21,23 +21,31 @@ html[dir="rtl"] {
    direction: ltr (with unicode-bidi: embed so each one is treated as its
    own self-contained LTR run) fixes the word/number order while the
    explicit text-align: right keeps them visually flush right, matching the
-   rest of the mirrored layout. `li:not(.d-flex)` is used instead of a bare
-   `li` so label/value rows built with `d-flex justify-content-between`
-   (e.g. Opening Hours) keep their own RTL flex mirroring intact -- only the
-   *text* direction needed correcting, not that row's left/right ordering. */
-html[dir="rtl"] p,
-html[dir="rtl"] span,
-html[dir="rtl"] h1,
-html[dir="rtl"] h2,
-html[dir="rtl"] h3,
-html[dir="rtl"] h4,
-html[dir="rtl"] h5,
-html[dir="rtl"] h6,
-html[dir="rtl"] label,
+   rest of the mirrored layout. `:not(.d-flex):not(:has(.d-flex))` is used
+   instead of a bare tag so label/value rows built with
+   `d-flex justify-content-between` (e.g. Opening Hours, and the blog
+   sidebar's Categories list -- "Yoga Tips (3)") keep their own RTL flex
+   mirroring intact. The first `:not(.d-flex)` catches the row itself being
+   the flex container (Opening Hours' <li>); the second, `:not(:has(.d-flex))`,
+   catches cases one level removed, where the flex container is a
+   descendant (the Categories list's <a class="d-flex ..."> sits INSIDE a
+   plain <li>, so the <li> itself isn't ".d-flex" but forcing direction on
+   it would still inherit down and un-mirror that inner flex row). Only the
+   *text* direction needed correcting, never a flex row's left/right
+   ordering. */
+html[dir="rtl"] p:not(.d-flex):not(:has(.d-flex)),
+html[dir="rtl"] span:not(.d-flex):not(:has(.d-flex)),
+html[dir="rtl"] h1:not(.d-flex):not(:has(.d-flex)),
+html[dir="rtl"] h2:not(.d-flex):not(:has(.d-flex)),
+html[dir="rtl"] h3:not(.d-flex):not(:has(.d-flex)),
+html[dir="rtl"] h4:not(.d-flex):not(:has(.d-flex)),
+html[dir="rtl"] h5:not(.d-flex):not(:has(.d-flex)),
+html[dir="rtl"] h6:not(.d-flex):not(:has(.d-flex)),
+html[dir="rtl"] label:not(.d-flex):not(:has(.d-flex)),
 html[dir="rtl"] option,
-html[dir="rtl"] td,
-html[dir="rtl"] th,
-html[dir="rtl"] li:not(.d-flex) {
+html[dir="rtl"] td:not(.d-flex):not(:has(.d-flex)),
+html[dir="rtl"] th:not(.d-flex):not(:has(.d-flex)),
+html[dir="rtl"] li:not(.d-flex):not(:has(.d-flex)) {
   direction: ltr;
   unicode-bidi: embed;
   text-align: right;
@@ -63,6 +71,19 @@ html[dir="rtl"] .text-center h6,
 html[dir="rtl"] .text-center label,
 html[dir="rtl"] .text-center li:not(.d-flex) {
   text-align: center;
+}
+
+/* Placeholder text (e.g. the blog sidebar's "Search articles...") has the
+   same bidi-reordering problem as regular text content -- it was rendering
+   as "...Search articles" with the ellipsis at the front. Inputs/textareas
+   weren't in the fix-list above since forcing direction on the field
+   itself would also flip the direction actual TYPED user input renders in;
+   ::placeholder is a separate pseudo-element, so this only corrects the
+   placeholder hint text and leaves real typed input untouched. */
+html[dir="rtl"] input::placeholder,
+html[dir="rtl"] textarea::placeholder {
+  direction: ltr;
+  unicode-bidi: plaintext;
 }
 
 html[dir="rtl"] .me-auto {
@@ -176,4 +197,31 @@ html[dir="rtl"] .pagination .page-link {
 }
 html[dir="rtl"] .pagination .page-item:first-child .page-link {
   margin-right: 0;
+}
+
+/* Select dropdowns (e.g. Contact page's "Choose a subject..."): both
+   Bootstrap's default arrow (light mode, an SVG background-image) and our
+   custom dark-mode chevron (a pair of gradients drawn to look like a "v")
+   are positioned with "right 0.75rem" / "calc(100% - Xrem)" -- a PHYSICAL
+   right-edge position that ignores `dir`. But the option text itself
+   already correctly flips to text-align:right under RTL, so the arrow and
+   the text both end up crowding the same right edge and overlapping
+   instead of sitting on opposite sides. Move the arrow to the left edge
+   and swap the left/right padding so there's proper breathing room between
+   the arrow and the text again. */
+html[dir="rtl"] .form-select {
+  padding-right: 0.75rem;
+  padding-left: 2.25rem;
+  background-position: left 0.75rem center;
+}
+html[dir="rtl"][data-theme="dark"] .form-select {
+  /* The dark-mode chevron is drawn from two diagonal-gradient triangles at
+     slightly different X offsets; whichever one has the SMALLER offset
+     from its anchor edge ends up physically closer to that edge. Simply
+     mirroring "100% - Xrem" into "0% + Xrem" for each layer keeps the
+     offsets attached to the same layer, which flips which triangle is
+     closer to the edge and turns the "v" into a malformed shape -- so the
+     two offsets need to swap layers (not just edges) to reproduce the same
+     "v" on the left. */
+  background-position: calc(0% + 0.65rem) center, calc(0% + 1rem) center, left 0.5rem center;
 }
