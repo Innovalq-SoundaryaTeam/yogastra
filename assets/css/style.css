@@ -56,6 +56,17 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* Flex rows pairing a fixed-size image with a text block (the blog's
+   "Popular Posts" list items, the blog-details author box, etc.) were
+   letting the text block refuse to shrink/wrap below its natural content
+   width -- a classic flexbox gotcha where flex items default to
+   min-width:auto instead of 0. Long titles/bios could silently push the
+   row past the viewport instead of wrapping onto a new line. */
+.d-flex.align-items-center > img + div {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
   font-weight: 600;
