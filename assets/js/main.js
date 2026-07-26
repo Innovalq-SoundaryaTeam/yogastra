@@ -63,7 +63,11 @@ document.addEventListener('DOMContentLoaded', () => {
             rtlToggleBtn.classList.remove('active');
             rtlToggleBtn.setAttribute('aria-label', 'Switch to RTL Mode');
         }
-        icon.classList.toggle('fa-flip', dir === 'rtl');
+        // NOTE: Font Awesome 6's "fa-flip" is a continuous 3D flip ANIMATION
+        // (matrix3d keyframes), not a static mirror -- it made this icon
+        // render as a garbled, mid-rotation glyph. "fa-flip-horizontal" is
+        // the actual static horizontal-mirror utility class.
+        icon.classList.toggle('fa-flip-horizontal', dir === 'rtl');
     }
 
     // 2. Form Validation (Client-side)

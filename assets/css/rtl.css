@@ -43,6 +43,28 @@ html[dir="rtl"] li:not(.d-flex) {
   text-align: right;
 }
 
+/* The block above sets text-align:right DIRECTLY on these elements, which
+   beats simple inheritance -- so it was overriding deliberately-centered
+   content (e.g. the footer's "Join Our Newsletter" heading/paragraph,
+   which sit inside a ".text-center" column) and pinning it to the right
+   instead. Restore centering for anything actually meant to be centered by
+   re-targeting the same element list wherever a ".text-center" ancestor is
+   present; being a more specific selector, this wins over the plain rule
+   above. */
+html[dir="rtl"] .text-center,
+html[dir="rtl"] .text-center p,
+html[dir="rtl"] .text-center span,
+html[dir="rtl"] .text-center h1,
+html[dir="rtl"] .text-center h2,
+html[dir="rtl"] .text-center h3,
+html[dir="rtl"] .text-center h4,
+html[dir="rtl"] .text-center h5,
+html[dir="rtl"] .text-center h6,
+html[dir="rtl"] .text-center label,
+html[dir="rtl"] .text-center li:not(.d-flex) {
+  text-align: center;
+}
+
 html[dir="rtl"] .me-auto {
   margin-right: 0 !important;
   margin-left: auto !important;
