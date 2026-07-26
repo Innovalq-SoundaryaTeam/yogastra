@@ -45,7 +45,8 @@ html[dir="rtl"] label:not(.d-flex):not(:has(.d-flex)),
 html[dir="rtl"] option,
 html[dir="rtl"] td:not(.d-flex):not(:has(.d-flex)),
 html[dir="rtl"] th:not(.d-flex):not(:has(.d-flex)),
-html[dir="rtl"] li:not(.d-flex):not(:has(.d-flex)) {
+html[dir="rtl"] li:not(.d-flex):not(:has(.d-flex)),
+html[dir="rtl"] .accordion-body {
   direction: ltr;
   unicode-bidi: embed;
   text-align: right;
@@ -53,12 +54,16 @@ html[dir="rtl"] li:not(.d-flex):not(:has(.d-flex)) {
 
 /* The block above sets text-align:right DIRECTLY on these elements, which
    beats simple inheritance -- so it was overriding deliberately-centered
-   content (e.g. the footer's "Join Our Newsletter" heading/paragraph,
-   which sit inside a ".text-center" column) and pinning it to the right
-   instead. Restore centering for anything actually meant to be centered by
-   re-targeting the same element list wherever a ".text-center" ancestor is
-   present; being a more specific selector, this wins over the plain rule
-   above. */
+   content (e.g. the footer's "Join Our Newsletter" heading/paragraph, and
+   page headers like "Membership Plans", which sit inside a ".text-center"
+   ancestor) and pinning it to the right instead. Restore centering for
+   anything actually meant to be centered by re-targeting the same element
+   list wherever a ".text-center" ancestor is present. `!important` is used
+   here (rather than relying on selector specificity) because the block
+   above picked up extra `:not(...)` clauses over time to dodge other bugs,
+   which can accidentally out-specify a plain descendant selector like
+   ".text-center h1" -- !important guarantees centering always wins
+   regardless of how the other rule's specificity changes in the future. */
 html[dir="rtl"] .text-center,
 html[dir="rtl"] .text-center p,
 html[dir="rtl"] .text-center span,
@@ -70,7 +75,7 @@ html[dir="rtl"] .text-center h5,
 html[dir="rtl"] .text-center h6,
 html[dir="rtl"] .text-center label,
 html[dir="rtl"] .text-center li:not(.d-flex) {
-  text-align: center;
+  text-align: center !important;
 }
 
 /* Placeholder text (e.g. the blog sidebar's "Search articles...") has the
@@ -164,7 +169,26 @@ html[dir="rtl"][data-theme="dark"] .hero-overlay {
   background: linear-gradient(to left, rgba(18, 18, 18, 0.9) 0%, rgba(18, 18, 18, 0.6) 100%);
 }
 
-/* Accordion Icons */
+/* Accordion (FAQ): <button> is a native form control, and browsers don't
+   inherit `direction` into native controls from an ancestor's `dir`
+   attribute the way they do for ordinary elements (the same reason
+   .form-select's arrow needed an explicit fix earlier) -- so
+   .accordion-button was staying direction:ltr even under RTL, its text
+   stayed left-aligned, and the chevron's margin-right:auto (below) had no
+   RTL flex context to push against, so it kept sitting on the right
+   instead of moving to the left. Force the button itself to direction:rtl
+   first so the flex order and the chevron's auto-margin actually mirror. */
+html[dir="rtl"] .accordion-button {
+  direction: rtl;
+  text-align: right;
+  /* direction:rtl above is needed for the icon's flex position (see
+     comment above), but it also bidi-reorders the button's own English
+     question text and its trailing "?" to the front. unicode-bidi:plaintext
+     resolves THIS element's text run from its own first strong character
+     (independent of the `direction` property), fixing punctuation order
+     without affecting flex item order, which is unrelated to unicode-bidi. */
+  unicode-bidi: plaintext;
+}
 html[dir="rtl"] .accordion-button::after {
   margin-left: 0;
   margin-right: auto;
