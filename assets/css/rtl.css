@@ -225,3 +225,32 @@ html[dir="rtl"][data-theme="dark"] .form-select {
      "v" on the left. */
   background-position: calc(0% + 0.65rem) center, calc(0% + 1rem) center, left 0.5rem center;
 }
+
+/* Input groups (e.g. the blog sidebar's Search box: an <input> then a
+   <button>) have the exact same :first-child/:last-child + negative-margin
+   "attach the pieces together" trick as .pagination, and it breaks the
+   same way under RTL. The input (DOM-first) keeps its rounded LEFT corners
+   and the button (DOM-last) keeps its rounded RIGHT corners, but RTL's
+   flex-mirror moves the input to the right and the button to the left --
+   so now BOTH pieces are rounded on the edges facing each OTHER instead of
+   their true outer edges, and the border-collapsing margin (margin-left:
+   -1px on the button) pulls the button away from the input instead of
+   into it. Result: two separate pill shapes with a gap, instead of one
+   seamless attached control. Swap which side gets rounded and flip the
+   overlap margin to match. */
+html[dir="rtl"] .input-group > :first-child {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-top-right-radius: var(--radius-md, 0.375rem);
+  border-bottom-right-radius: var(--radius-md, 0.375rem);
+}
+html[dir="rtl"] .input-group > :last-child {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-top-left-radius: var(--radius-md, 0.375rem);
+  border-bottom-left-radius: var(--radius-md, 0.375rem);
+}
+html[dir="rtl"] .input-group > :not(:first-child) {
+  margin-left: 0;
+  margin-right: -1px;
+}
