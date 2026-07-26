@@ -675,7 +675,7 @@ a:hover .icon-bounce {
    the columns stack, so no offset should apply there. */
 @media (min-width: 992px) {
   .blog-sidebar {
-    margin-top: 4.1rem;
+    margin-top: 8.6rem;
   }
 }
 
