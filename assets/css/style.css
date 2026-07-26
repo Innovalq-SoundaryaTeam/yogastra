@@ -656,7 +656,21 @@ a:hover .icon-bounce {
   z-index: 1030;
 }
 
-/* 
+/* Blog page: the main column starts with a filter-tabs row (nav-pills +
+   its mb-5 bottom margin) before the actual post grid begins, but the
+   sidebar column is a separate flex item in the same Bootstrap row, so its
+   first card (Search) starts flush with the row's top -- level with the
+   filter tabs, not with the post cards below them. Push the sidebar down
+   by that same amount so "Search" lines up with the first post card
+   instead of the filter pills above it. Desktop-only: on narrower screens
+   the columns stack, so no offset should apply there. */
+@media (min-width: 992px) {
+  .blog-sidebar {
+    margin-top: 4.1rem;
+  }
+}
+
+/*
 ==============================================
 RESPONSIVE ADJUSTMENTS
 ==============================================

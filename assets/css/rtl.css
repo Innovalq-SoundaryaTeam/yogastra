@@ -132,3 +132,26 @@ html[dir="rtl"] .footer-social a {
   margin-right: 0;
   margin-left: 8px;
 }
+
+/* Pagination (blog "Next/1/2/Previous" etc.) -- Bootstrap rounds the
+   corners and overlaps borders using :first-child/:last-child and a
+   negative margin-left, all based on DOM order. Flex-mirroring under RTL
+   flips the VISUAL order (Next ends up on the left, Previous on the
+   right) but :first-child/:last-child still match the same DOM elements,
+   so the rounded corners and border-collapse trick end up on the wrong
+   (inner) edges -- square corners where the pill should end, rounded
+   corners in the middle, and a doubled border where they should overlap.
+   Swap which end gets rounded and flip the overlap direction to match. */
+html[dir="rtl"] .pagination .page-item:first-child .page-link {
+  border-radius: 0 var(--bs-pagination-border-radius, 0.375rem) var(--bs-pagination-border-radius, 0.375rem) 0;
+}
+html[dir="rtl"] .pagination .page-item:last-child .page-link {
+  border-radius: var(--bs-pagination-border-radius, 0.375rem) 0 0 var(--bs-pagination-border-radius, 0.375rem);
+}
+html[dir="rtl"] .pagination .page-link {
+  margin-left: 0;
+  margin-right: -1px;
+}
+html[dir="rtl"] .pagination .page-item:first-child .page-link {
+  margin-right: 0;
+}
