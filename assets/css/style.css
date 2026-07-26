@@ -34,6 +34,19 @@ YOGASTRA - CORE STYLES
 }
 
 /* Base Reset & Typography */
+html {
+  /* The actual page-level horizontal scrollbar is governed by <html>, not
+     <body> -- body's own overflow-x:hidden below wasn't enough on its own.
+     Several pages (blog.html, instructors.html, contact.html,
+     class-details.html) use "row g-5" directly inside a plain ".container":
+     Bootstrap's g-5 gutter gives the row a larger negative margin (24px per
+     side) than the container's own default padding (12px per side) can
+     absorb, so the row quietly bled past the viewport edge on narrow
+     screens and produced a horizontal scrollbar. */
+  overflow-x: hidden;
+  width: 100%;
+}
+
 body {
   font-family: var(--font-body);
   background-color: var(--color-bg);
