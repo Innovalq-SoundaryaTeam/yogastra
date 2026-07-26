@@ -8,6 +8,41 @@ html[dir="rtl"] {
   text-align: right;
 }
 
+/* All of Yogastra's actual copy is English (an LTR script). RTL mode is
+   meant to mirror the page's LAYOUT (nav, alignment, spacing) -- not
+   scramble the words and numbers inside a sentence. But every element
+   under html[dir="rtl"] inherits `direction: rtl` by default, and the
+   browser's Unicode bidi algorithm then reorders "neutral" runs (digits,
+   punctuation) within a paragraph based on that inherited direction. That's
+   why things like "+1 (555) 123-4567", "6:00 AM - 9:00 PM", and "123
+   Serenity Lane" were rendering visually reordered ("123-4567 (555) 1+",
+   "AM - 9:00 PM 6:00", "Serenity Lane 123") even though the underlying HTML
+   text was never touched. Forcing these text-holding elements back to
+   direction: ltr (with unicode-bidi: embed so each one is treated as its
+   own self-contained LTR run) fixes the word/number order while the
+   explicit text-align: right keeps them visually flush right, matching the
+   rest of the mirrored layout. `li:not(.d-flex)` is used instead of a bare
+   `li` so label/value rows built with `d-flex justify-content-between`
+   (e.g. Opening Hours) keep their own RTL flex mirroring intact -- only the
+   *text* direction needed correcting, not that row's left/right ordering. */
+html[dir="rtl"] p,
+html[dir="rtl"] span,
+html[dir="rtl"] h1,
+html[dir="rtl"] h2,
+html[dir="rtl"] h3,
+html[dir="rtl"] h4,
+html[dir="rtl"] h5,
+html[dir="rtl"] h6,
+html[dir="rtl"] label,
+html[dir="rtl"] option,
+html[dir="rtl"] td,
+html[dir="rtl"] th,
+html[dir="rtl"] li:not(.d-flex) {
+  direction: ltr;
+  unicode-bidi: embed;
+  text-align: right;
+}
+
 html[dir="rtl"] .me-auto {
   margin-right: 0 !important;
   margin-left: auto !important;
