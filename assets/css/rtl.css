@@ -267,29 +267,14 @@ html[dir="rtl"] .input-group > :not(:first-child) {
   margin-right: -1px;
 }
 
-/* Pricing card checklists (home page + Pricing page: "Unlimited Classes",
-   "10 Classes per month", etc.) were left flush against the card's left
-   padding, leaving a lot of empty space on the right in these wide cards.
-   The browser's default UL padding (`padding-inline-start: 40px`) resolves
-   to `padding-right` under RTL direction -- style.css only zeroes the
-   physical `padding-left`, so a phantom 40px gap remained on the right,
-   shrinking the usable width and causing the empty space.
-
-   First attempt centered each row individually with `justify-content:
-   center` on the `<li>` (each is `display: flex`, style.css
-   ".yoga-card .list-unstyled li"), but that centers every row
-   independently based on ITS OWN text width, so the checkmark icons end
-   up at a different x position per row instead of lining up -- the
-   "bullets should be straight" bug.
-
-   Fixed properly by shrinking the <ul> itself to an inline-block sized to
-   its widest row (so every <li> stretches to that same shared width and
-   the checkmark, always the flex row's first item, lands at the same x
-   on every row), then centering that whole block within the card via the
-   card's existing `.text-center` (inherited text-align: center already
-   used for the heading/price above it). Scoped to RTL only so
-   default/LTR mode keeps the original left-aligned look. */
+/* Pricing card checklists are now centered in both LTR and RTL (see
+   style.css, ".yoga-card .yoga-card-body ul") via `display: inline-block`
+   so the list respects the card's inherited `text-align: center`. That
+   fix is direction-agnostic. The one thing that IS RTL-specific: the
+   browser's default UL padding (`padding-inline-start: 40px`) resolves to
+   `padding-right` under RTL direction -- style.css only zeroes the
+   physical `padding-left`, so a phantom 40px gap remained on the right
+   under RTL, shrinking the available width the list has to center within. */
 html[dir="rtl"] .yoga-card .yoga-card-body ul {
   padding-right: 0;
-  display: inline-block;
 }

@@ -415,6 +415,19 @@ COMPONENTS
 
 .yoga-card .yoga-card-body ul {
   padding-left: 0;
+  /* The checklist ("Unlimited Classes", "10 Classes per month", etc.) is
+     ".text-start" so its own text/icons stay left-to-right, but the <ul>
+     itself should sit centered in the card like the heading/price above
+     it. Block-level elements ignore an ancestor's text-align, so as
+     written the list just stretched full-width and hugged the left edge.
+     Shrinking it to an inline-block sized to its widest row turns it into
+     inline content that DOES respect the ancestor's text-align: center
+     (set by ".yoga-card.text-center"), and because every row then
+     stretches to that same shared width, the checkmark icons (always each
+     row's first flex item) line up in a straight column instead of
+     shifting per row. Applies in both LTR and RTL -- this isn't a
+     direction-mirroring fix, just correct centering. */
+  display: inline-block;
 }
 
 .yoga-card .yoga-card-body ul li {
