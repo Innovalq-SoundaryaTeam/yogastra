@@ -223,6 +223,33 @@ COMPONENTS
   color: var(--color-primary);
 }
 
+/* Desktop nav links (.navbar-nav.mx-auto) don't actually land at the
+   visual center of the navbar. Bootstrap's `mx-auto` only balances the
+   space left over *inside* .navbar-collapse, but the theme-toggle/
+   RTL-toggle/Member Login cluster sits alongside the nav links inside
+   that same collapse and eats into space on one side only -- so the nav
+   links end up shifted toward the (usually narrower) logo side instead of
+   the true middle of the bar. This is a plain leftover-space calculation,
+   unrelated to text direction, so it happens identically with the RTL
+   toggle on or off. Fixed by taking the nav links out of that flex
+   calculation and centering them against the whole navbar bar instead;
+   scoped to the desktop breakpoint (>=992px) so it doesn't interfere with
+   the mobile dropdown's own absolute-positioning rules below. */
+@media (min-width: 992px) {
+  .navbar > .container {
+    position: relative;
+  }
+  .navbar-nav.mx-auto {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0 !important;
+  }
+  .navbar-collapse {
+    justify-content: flex-end;
+  }
+}
+
 /* Cards */
 .yoga-card {
   background-color: var(--color-sidebar);
