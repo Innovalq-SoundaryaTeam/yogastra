@@ -4,8 +4,11 @@ YOGASTRA - RTL (Right-to-Left)
 ==============================================
 */
 
+/* By design, RTL mode here only mirrors LAYOUT (nav order, icon/button
+   positions, flex direction) -- it does NOT re-justify the actual English
+   text to read right-aligned. Text stays left-aligned in both modes. */
 html[dir="rtl"] {
-  text-align: right;
+  text-align: left;
 }
 
 /* All of Yogastra's actual copy is English (an LTR script). RTL mode is
@@ -19,9 +22,9 @@ html[dir="rtl"] {
    "AM - 9:00 PM 6:00", "Serenity Lane 123") even though the underlying HTML
    text was never touched. Forcing these text-holding elements back to
    direction: ltr (with unicode-bidi: embed so each one is treated as its
-   own self-contained LTR run) fixes the word/number order while the
-   explicit text-align: right keeps them visually flush right, matching the
-   rest of the mirrored layout. `:not(.d-flex):not(:has(.d-flex))` is used
+   own self-contained LTR run) fixes the word/number order. text-align is
+   pinned to left (not right) since RTL mode here only mirrors layout, not
+   text justification. `:not(.d-flex):not(:has(.d-flex))` is used
    instead of a bare tag so label/value rows built with
    `d-flex justify-content-between` (e.g. Opening Hours, and the blog
    sidebar's Categories list -- "Yoga Tips (3)") keep their own RTL flex
@@ -49,14 +52,14 @@ html[dir="rtl"] li:not(.d-flex):not(:has(.d-flex)),
 html[dir="rtl"] .accordion-body {
   direction: ltr;
   unicode-bidi: embed;
-  text-align: right;
+  text-align: left;
 }
 
-/* The block above sets text-align:right DIRECTLY on these elements, which
+/* The block above sets text-align:left DIRECTLY on these elements, which
    beats simple inheritance -- so it was overriding deliberately-centered
    content (e.g. the footer's "Join Our Newsletter" heading/paragraph, and
    page headers like "Membership Plans", which sit inside a ".text-center"
-   ancestor) and pinning it to the right instead. Restore centering for
+   ancestor) and pinning it to the left instead. Restore centering for
    anything actually meant to be centered by re-targeting the same element
    list wherever a ".text-center" ancestor is present. `!important` is used
    here (rather than relying on selector specificity) because the block
@@ -158,7 +161,7 @@ html[dir="rtl"] .navbar-brand i {
 }
 
 html[dir="rtl"] .navbar .dropdown-menu {
-  text-align: right;
+  text-align: left;
 }
 
 /* Hero gradient */
@@ -180,13 +183,16 @@ html[dir="rtl"][data-theme="dark"] .hero-overlay {
    first so the flex order and the chevron's auto-margin actually mirror. */
 html[dir="rtl"] .accordion-button {
   direction: rtl;
-  text-align: right;
-  /* direction:rtl above is needed for the icon's flex position (see
-     comment above), but it also bidi-reorders the button's own English
-     question text and its trailing "?" to the front. unicode-bidi:plaintext
-     resolves THIS element's text run from its own first strong character
-     (independent of the `direction` property), fixing punctuation order
-     without affecting flex item order, which is unrelated to unicode-bidi. */
+  /* direction:rtl above is only needed for the icon's flex position (see
+     comment above) -- it is NOT meant to re-justify the question text, so
+     text-align is pinned to left explicitly (a physical value, independent
+     of `direction`). direction:rtl also bidi-reorders the button's own
+     English question text and its trailing "?" to the front;
+     unicode-bidi:plaintext resolves THIS element's text run from its own
+     first strong character (independent of the `direction` property),
+     fixing punctuation order without affecting flex item order, which is
+     unrelated to unicode-bidi. */
+  text-align: left;
   unicode-bidi: plaintext;
 }
 html[dir="rtl"] .accordion-button::after {
@@ -223,32 +229,12 @@ html[dir="rtl"] .pagination .page-item:first-child .page-link {
   margin-right: 0;
 }
 
-/* Select dropdowns (e.g. Contact page's "Choose a subject..."): both
-   Bootstrap's default arrow (light mode, an SVG background-image) and our
-   custom dark-mode chevron (a pair of gradients drawn to look like a "v")
-   are positioned with "right 0.75rem" / "calc(100% - Xrem)" -- a PHYSICAL
-   right-edge position that ignores `dir`. But the option text itself
-   already correctly flips to text-align:right under RTL, so the arrow and
-   the text both end up crowding the same right edge and overlapping
-   instead of sitting on opposite sides. Move the arrow to the left edge
-   and swap the left/right padding so there's proper breathing room between
-   the arrow and the text again. */
-html[dir="rtl"] .form-select {
-  padding-right: 0.75rem;
-  padding-left: 2.25rem;
-  background-position: left 0.75rem center;
-}
-html[dir="rtl"][data-theme="dark"] .form-select {
-  /* The dark-mode chevron is drawn from two diagonal-gradient triangles at
-     slightly different X offsets; whichever one has the SMALLER offset
-     from its anchor edge ends up physically closer to that edge. Simply
-     mirroring "100% - Xrem" into "0% + Xrem" for each layer keeps the
-     offsets attached to the same layer, which flips which triangle is
-     closer to the edge and turns the "v" into a malformed shape -- so the
-     two offsets need to swap layers (not just edges) to reproduce the same
-     "v" on the left. */
-  background-position: calc(0% + 0.65rem) center, calc(0% + 1rem) center, left 0.5rem center;
-}
+/* Select dropdowns (e.g. Contact page's "Choose a subject..."): the arrow
+   used to need moving to the left because the option text was right-
+   aligned under RTL, which crowded the arrow and text at the same right
+   edge. Text now stays left-aligned by design (RTL only mirrors layout,
+   not text justification), so Bootstrap's default right-side arrow no
+   longer conflicts with the text -- no override needed here at all. */
 
 /* Input groups (e.g. the blog sidebar's Search box: an <input> then a
    <button>) have the exact same :first-child/:last-child + negative-margin
