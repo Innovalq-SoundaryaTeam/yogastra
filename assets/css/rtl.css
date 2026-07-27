@@ -77,7 +77,9 @@ html[dir="rtl"] .text-center h4,
 html[dir="rtl"] .text-center h5,
 html[dir="rtl"] .text-center h6,
 html[dir="rtl"] .text-center label,
-html[dir="rtl"] .text-center li:not(.d-flex) {
+html[dir="rtl"] .text-center li:not(.d-flex),
+html[dir="rtl"] .text-center td,
+html[dir="rtl"] .text-center th {
   text-align: center !important;
 }
 
