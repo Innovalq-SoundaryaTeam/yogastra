@@ -264,3 +264,24 @@ html[dir="rtl"] .input-group > :not(:first-child) {
   margin-left: 0;
   margin-right: -1px;
 }
+
+/* Pricing card checklists (home page + Pricing page: "Unlimited Classes",
+   "10 Classes per month", etc.) were left flush against the card's left
+   padding, leaving a lot of empty space on the right in these wide cards.
+   A plain `text-align: center` on the <ul> does NOT work here: each <li>
+   is `display: flex` (style.css, ".yoga-card .list-unstyled li") so its
+   checkmark icon + text are flex items, and text-align has no effect on
+   flex-item layout. On top of that, the browser's default UL padding
+   (`padding-inline-start: 40px`) resolves to `padding-right` under RTL
+   direction -- style.css only zeroes the physical `padding-left`, so a
+   phantom 40px gap remained on the right, shrinking the usable width and
+   causing the empty space the checklist appeared to have. Fixed by
+   zeroing that resolved-right padding and centering each row via
+   `justify-content` (the correct flex property), scoped to RTL only so
+   default/LTR mode keeps the original left-aligned look. */
+html[dir="rtl"] .yoga-card .yoga-card-body ul {
+  padding-right: 0;
+}
+html[dir="rtl"] .yoga-card .list-unstyled li {
+  justify-content: center;
+}
