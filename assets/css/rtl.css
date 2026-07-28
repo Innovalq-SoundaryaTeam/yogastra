@@ -291,3 +291,18 @@ html[dir="rtl"] .input-group > :not(:first-child) {
 html[dir="rtl"] .yoga-card .yoga-card-body ul {
   padding-right: 0;
 }
+
+/* Member dashboard sidebar (My Profile, Book a Class, etc.): the theme
+   toggle and RTL toggle buttons are plain inline-block <button>s sitting
+   above the "Logout" link, so their horizontal position depends on
+   text-align rather than flex order. Under RTL the whole sidebar mirrors
+   to the opposite side of the page (native flex-mirror on the top-level
+   ".d-flex" wrapper), and every other row in the sidebar (nav links,
+   Logout) already flips its icon to the opposite side to match -- but
+   these two buttons kept hugging the sidebar's start/left inner edge,
+   looking out of place against an otherwise fully-mirrored sidebar. Push
+   them to the sidebar's end/right inner edge so the whole sidebar reads
+   as consistently mirrored. */
+html[dir="rtl"] .dashboard-sidebar .mt-auto {
+  text-align: right;
+}
