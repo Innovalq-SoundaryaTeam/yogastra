@@ -85,15 +85,28 @@ html[dir="rtl"] .text-center th {
 
 /* Placeholder text (e.g. the blog sidebar's "Search articles...") has the
    same bidi-reordering problem as regular text content -- it was rendering
-   as "...Search articles" with the ellipsis at the front. Inputs/textareas
-   weren't in the fix-list above since forcing direction on the field
-   itself would also flip the direction actual TYPED user input renders in;
-   ::placeholder is a separate pseudo-element, so this only corrects the
-   placeholder hint text and leaves real typed input untouched. */
+   as "...Search articles" with the ellipsis at the front. */
 html[dir="rtl"] input::placeholder,
 html[dir="rtl"] textarea::placeholder {
   direction: ltr;
   unicode-bidi: plaintext;
+}
+
+/* Actual typed/filled-in field values (e.g. dashboard "My Profile": Full
+   Name, Email Address, Phone Number) have the same problem one level up --
+   text inputs inherit `direction: rtl` from <html>, so the browser renders
+   and caret-positions the value flush against the field's right edge
+   ("sarah.mitchell@example.com" sitting at the right corner of the box)
+   instead of the left, same as every other text element on the site. Text
+   stays left-aligned by design (RTL only mirrors layout, not text
+   justification), so form fields need the same explicit left-pin as
+   everything else. Excludes checkboxes/radios since direction is
+   meaningless for them. */
+html[dir="rtl"] input:not([type="checkbox"]):not([type="radio"]),
+html[dir="rtl"] textarea,
+html[dir="rtl"] select {
+  direction: ltr;
+  text-align: left;
 }
 
 html[dir="rtl"] .me-auto {
