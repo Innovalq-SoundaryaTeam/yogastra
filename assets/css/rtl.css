@@ -341,3 +341,20 @@ html[dir="rtl"] .blockquote.border-start {
   border-left: 0 !important;
   border-right: 4px solid #0d6efd !important;
 }
+
+/* The border moved to the right (above), but the quote's own text and
+   attribution still hugged the LEFT padding -- the general "text stays
+   left" bidi-fix rule sets text-align:left directly on <p>/other text
+   elements, which beats plain inheritance from the blockquote. That left
+   the accent bar on the right with nothing next to it, and the actual
+   quote text sitting disconnected on the opposite side, which is why the
+   toggle looked like it "wasn't changing" this block at all -- only a
+   thin line moved while all the visible text stayed put. Same fix pattern
+   as the FAQ answer: pull the text over to the right too, so it reads
+   together with its border. !important matches the specificity of the
+   bidi-fix rule it's overriding. */
+html[dir="rtl"] .blockquote.border-start,
+html[dir="rtl"] .blockquote.border-start p,
+html[dir="rtl"] .blockquote.border-start footer {
+  text-align: right !important;
+}
