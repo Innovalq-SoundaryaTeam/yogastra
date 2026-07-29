@@ -49,6 +49,7 @@ html[dir="rtl"] option,
 html[dir="rtl"] td:not(.d-flex):not(:has(.d-flex)),
 html[dir="rtl"] th:not(.d-flex):not(:has(.d-flex)),
 html[dir="rtl"] li:not(.d-flex):not(:has(.d-flex)),
+html[dir="rtl"] .alert:not(.d-flex):not(:has(.d-flex)),
 html[dir="rtl"] .accordion-body {
   direction: ltr;
   unicode-bidi: embed;
@@ -357,4 +358,30 @@ html[dir="rtl"] .blockquote.border-start,
 html[dir="rtl"] .blockquote.border-start p,
 html[dir="rtl"] .blockquote.border-start footer {
   text-align: right !important;
+}
+
+/* Login form: "Password" sits in a ".form-label d-flex justify-content-
+   between" row together with the "Forgot Password?" link, so it flex-
+   mirrors under RTL and ends up flush against the right side, with the
+   link on the left. "Email Address" right above it is a plain (non-flex)
+   label, so it followed the general "text stays left" rule and stayed on
+   the left -- the two stacked labels ended up misaligned with each other.
+   Align "Email Address" to the right too so both field labels sit on the
+   same side. Scoped to the login form specifically since register.html's
+   labels don't have this same flex-mirrored sibling to mismatch against. */
+html[dir="rtl"] #loginForm .mb-3:has(> label.form-label:not(.d-flex)) {
+  text-align: right;
+}
+
+/* "Forgot Password?" is a plain <a>, which isn't in the general bidi-fix
+   element list (that list only covers p/span/h1-h6/label/li/td/th/
+   .accordion-body), so nothing stopped the browser's bidi algorithm from
+   reordering its own trailing "?" to the front under the inherited RTL
+   direction -- rendering as "?Forgot Password", the same punctuation-
+   jump bug fixed earlier for the FAQ accordion's question text.
+   unicode-bidi:plaintext resolves this link's own text run from its first
+   strong character (independent of inherited direction), fixing the
+   punctuation order without needing to touch its flex position. */
+html[dir="rtl"] #loginForm .form-label a {
+  unicode-bidi: plaintext;
 }
