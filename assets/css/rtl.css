@@ -306,3 +306,18 @@ html[dir="rtl"] .yoga-card .yoga-card-body ul {
 html[dir="rtl"] .dashboard-sidebar .mt-auto {
   text-align: right;
 }
+
+/* FAQ accordion (Pricing page): the question in ".accordion-button" sits
+   flush against the right side of its row under RTL -- that's a flex
+   ordering effect (see the accordion-button comment above), not text
+   alignment. The answer below it in ".accordion-body" is plain block
+   content, though, so it just followed the general "text stays left"
+   rule and stayed pinned to the left edge -- leaving the question on the
+   right and its answer on the left, visibly mismatched. Align the answer
+   to the right too so it lines up under its question. This only moves
+   which edge the paragraph hugs; direction stays ltr (set earlier on this
+   same selector) so the words within each line still read normally
+   left-to-right. */
+html[dir="rtl"] .accordion-body {
+  text-align: right;
+}
