@@ -321,3 +321,23 @@ html[dir="rtl"] .dashboard-sidebar .mt-auto {
 html[dir="rtl"] .accordion-body {
   text-align: right;
 }
+
+/* Blog article pull-quotes (blog-details.html: "border-start border-primary
+   border-4") use Bootstrap's ".border-start" utility, which this project
+   loads from the standard (LTR) bootstrap.min.css build -- in that build
+   ".border-start" simply IS "border-left", a fixed physical property, not
+   a direction-aware logical one. Toggling RTL never changes it, so the
+   quote's accent bar always stayed on the left, unlike every other
+   mirrored container on the site (chevrons, pagination corners, input-
+   group corners, etc.). Move it to the right under RTL. The exact width/
+   color are hardcoded to match what ".border-4"/".border-primary" already
+   render (4px solid #0d6efd) rather than reused via CSS variables,
+   because in Bootstrap 5.3 those utility classes set the literal
+   border-width/border-color properties directly with !important, not the
+   --bs-border-width/--bs-border-color custom properties -- confirmed via
+   computed style (the custom properties resolve to Bootstrap's 1px/
+   #dee2e6 defaults, while the actual rendered border is 4px/#0d6efd). */
+html[dir="rtl"] .blockquote.border-start {
+  border-left: 0 !important;
+  border-right: 4px solid #0d6efd !important;
+}
